@@ -1,0 +1,126 @@
+#= require_self
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+@import 'notifications';
+@import 'orders';
+@import 'sessions';
+@import 'users';
+@import 'welcome';
+
+
+$hover-color:white;
+$main-color:#176BBF;
+
+$hover-background:#176BBF;
+
+
+
+body {
+  background-color: #F5F5F5;
+  padding-top: 70px;
+  padding-bottom: 30px;
+  font-family:  "Heiti SC Light",
+                "Helvetica Neue",
+                Helvetica,
+                "Microsoft YaHei"
+                Arial,
+                sans-serif;
+}
+
+
+
+
+header {
+  position: fixed;left: 0;right: 0; top:0;
+  background-color: white;
+  height: 50px;
+}
+
+.navbar {
+  background-color: inherit;
+  border: 0;
+}
+
+.navbar-collapse.collapse.in {
+  box-shadow:0px 6px 7px #ececec ;
+}
+
+.navbar-default .navbar-nav > .active > a {
+  color:$hover-color;
+  background-color:$hover-background;
+      &:hover {
+          color: $hover-color;
+          background-color:$hover-background;
+      }
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: $main-color;
+  background-color: white;
+      &:hover {
+          color: $hover-color;
+          background-color: $hover-background;
+      }
+      &:focus {
+          color: $main-color;
+          background-color: white;
+      }
+
+}
+
+.navbar-default .navbar-nav > .open > a:focus {
+      color: $hover-color;
+      background-color: $hover-background;
+}
+
+
+.navbar-default .navbar-brand {
+  color: $main-color;
+      &:hover {
+          color: $main-color;
+      }
+}
+
+.nav > li > a {
+  padding: 8px 14px 8px 14px;
+  margin: 8px 8px 7px 8px;
+  border-radius:4px;
+}
+
+.navbar-brand {
+  padding: 16px 22px 15px 22px;
+}
+
+
+.dropdown-menu li > a:hover{
+  background-color: #176BBF;
+  color: white;
+}
+
+a:hover, a:focus {
+  text-decoration: none;
+}
+
+
+
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color:white;
+}
+
+.navbar-nav .open .dropdown-menu {
+  border:2px black;
+}
+
+
+.navbar-toggle {
+  border: 0px;
+}
+
+.item {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+

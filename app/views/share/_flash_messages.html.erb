@@ -1,0 +1,7 @@
+<% [:success, :info, :warning, :danger, :alert, :notice].each do |type| %>
+<% if flash[type] %>
+  <div data-alert class="alert-box <%= flash[type] %> radius">
+    <%= flash[type] %>
+    <a href="#" class="close">&times;</a>
+  </div>
+<% end %>
