@@ -34,11 +34,14 @@ class OrdersController < ApplicationController
 
   def update
     if params["order"].length == 1 && params["order"]["server"] = ""
-      @order.update_attribute(:server, current_user.id)
-      respond_to do |format|
-        format.html { }
-        format.js
+      if @order.server == nil
+        @order.update_attribute(:server, current_user.id)
+          respond_to do |format|
+          format.html { }
+          format.js
+        end
       end
+      
     else
       if @order.update_attributes(order_params)
         flash[:success] = "修改成功！"
