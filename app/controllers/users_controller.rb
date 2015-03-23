@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_action :signed_in_user, only: [:show, :edit, :update]
   before_action :set_user, only: [:show, :edit, :edit_avatar, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update]
-  before_action :admin_require, only: [:index, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
+
 
 
   def index
@@ -77,7 +77,7 @@ class UsersController < ApplicationController
     end
 
     def signed_in_user
-      redirect_to login_url, danger: "Please sign in." unless signed_in?
+      redirect_to new_session_path, danger: "Please sign in." unless signed_in?
     end
 
     def correct_user

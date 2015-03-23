@@ -1,3 +1,38 @@
-// Place all the styles related to the users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.signup-form {
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 5px;
+  max-width: 310px;
+  background-color: white;
+  padding: 10px 25px 18px 20px;
+  border-radius: 6px;
+}
+
+.signup-form > h1, h2, h3, h4, h5 {
+  text-align: center;
+}
+
+.signup-form > form > .row > .control-label {
+  text-align: right;
+  padding-top: 6px;
+}
+
+.signup-form > form > .row > .col-md-9 > .form-control {
+  margin-left: -10px;
+}
+
+.signup-form > form > .row > .btn {
+  margin-top: 15px;
+  margin-bottom: 8px;
+  min-width: 140px;
+
+}
+
+.signup-form > form > .row {
+  text-align:center;
+}
+
+.signup-form > .newone {
+  text-align:center;
+}

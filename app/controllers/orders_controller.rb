@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :signed_in_user, only: [:show, :edit, :update]
+  before_action :signed_in_user, only: [:new, :show, :edit, :update]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
 
@@ -21,8 +21,7 @@ class OrdersController < ApplicationController
 
 
   def create
-    @order = Order.new(order_params)
-
+    @order = current_user.orders.build(order_params)
     if @order.save
       flash[:success] = "任务发布成功！"
       redirect_to @order
@@ -34,17 +33,22 @@ class OrdersController < ApplicationController
 
 
   def update
-
-    if @order.update_attributes(order_params)
-      flash[:success] = "修改成功！"
-      redirect_to @order
+    if params["order"].length == 1 && params["order"]["server"] = ""
+      @order.update_attribute(:server, current_user.id)
+      respond_to do |format|
+        format.html { }
+        format.js
+      end
     else
-      flash[:danger] = "修改失败！"
-      render :edit
+      if @order.update_attributes(order_params)
+        flash[:success] = "修改成功！"
+        redirect_to @order
+      else
+        flash[:danger] = "修改失败！"
+        render :edit
+      end
     end
   end
-
-
 
 
 
@@ -67,7 +71,7 @@ class OrdersController < ApplicationController
     end
 
     def order_params
-      params.require(:order).permit(:title, :content, :deadline, :location, :phone, :status)
+      params.require(:order).permit(:title, :content, :deadline, :location, :phone, :status, :total)
     end
     
 end

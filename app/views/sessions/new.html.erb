@@ -1,28 +1,24 @@
-<h1>登录您的帐户</h1>
-
-
-
-    <div class="login-form">
-      <%= form_for(:session, url: sessions_path) do |f| %>
-        <div class="row item">
-          <%= f.label :email, "帐号", class:"col-md-3 control-label" %>
-          <div class="col-md-9">
-            <%= f.text_field :email, placeholder:"用户名或邮箱地址", class:'form-control' %>
-          </div>
-        </div>
-
-        <div class="row item">
-          <%= f.label :password, "密码", class:"col-md-3 control-label" %>
-          <div class="col-md-9">
-            <%= f.password_field :password, class:'form-control' %>
-          </div>
-        </div>
-
-        <div class="row">
-          <%= f.submit "登 录", class: "btn btn-large btn-primary col-md-12" %>
-        </div>
-      <% end %>
-      <br>
-      <p>还没有注册账户？  <%= link_to "现在注册!", new_user_path %></p>
+<div class="login-form">
+  <h3>登录</h3>
+  <%= form_for(:session, url: sessions_path) do |f| %>
+    <div class="row item">
+      <%= f.label :email, "帐号", class:"col-md-3 control-label" %>
+      <div class="col-md-9">
+        <%= f.text_field :email, placeholder:"邮箱地址！abc@xxx.com", class:'form-control' %>
+      </div>
     </div>
+    <div class="row item">
+      <%= f.label :password, "密码", class:"col-md-3 control-label" %>
+      <div class="col-md-9">
+        <%= f.password_field :password, class:'form-control' %>
+      </div>
+    </div>
+    <div class="row">
+      <%= f.submit "登 录", class: "btn btn-large btn-primary" %>
+    </div>
+  <% end %>
+  <br>
+    <div class="newone">还没有注册账户？  <%= link_to "现在注册!", new_user_path %></div>
+</div>
+
 

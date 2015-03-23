@@ -15,11 +15,13 @@ $main-color:#176BBF;
 
 $hover-background:#176BBF;
 
-
+html, body{
+    margin:0px;
+    padding:0px;
+}
 
 body {
   background-color: #F5F5F5;
-  padding-top: 70px;
   padding-bottom: 30px;
   font-family:  "Heiti SC Light",
                 "Helvetica Neue",
@@ -33,7 +35,6 @@ body {
 
 
 header {
-  position: fixed;left: 0;right: 0; top:0;
   background-color: white;
   height: 50px;
 }
@@ -64,8 +65,8 @@ header {
           background-color: $hover-background;
       }
       &:focus {
-          color: $main-color;
-          background-color: white;
+          color: $hover-color;
+          background-color: $hover-background;
       }
 
 }

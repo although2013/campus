@@ -33,8 +33,10 @@ ActiveRecord::Schema.define(version: 20150322082233) do
     t.string   "location"
     t.string   "phone"
     t.string   "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "server"
+    t.decimal  "total",      precision: 8, scale: 2
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id"

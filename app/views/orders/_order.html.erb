@@ -1,0 +1,25 @@
+<div class="order-card">
+  <div class="order-head"><%= order.user.name %>
+    <span class="order-title"><%= order.title %></span>
+    <span class="order-total"><%= order.total %></span>
+  </div>
+
+  <div class="order-content"><%= order.content %></div>
+  
+  <div class="order-foot">
+    <%= order.deadline %>
+    <%= order.location %>
+    <%= order.status %>
+  </div>
+  <div><%= User.find_by_id(order.server).name if order.server %></div>
+  <div class="order-btns">
+    <button>More</button>
+
+    <%= form_for(order, remote: true) do |f| %>
+      <%= f.hidden_field :server %>
+      <%= f.submit "Do It", class:"" %>
+    <% end %>
+  </div>
+</div>
+
+<br />
