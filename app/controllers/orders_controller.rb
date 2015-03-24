@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
 
   def index
-    @orders = Order.all
+    @orders = Order.includes(:user).all
   end
 
   def show
@@ -17,6 +17,17 @@ class OrdersController < ApplicationController
 
 
   def edit
+  end
+
+  def get_order
+    @order = Order.find(params[:order])
+    if current_user && current_user == User.find(params[:user_id])
+      @order.update_attribute(:server, current_user.id)
+        respond_to do |format|
+        format.html
+        format.js
+      end
+    end
   end
 
 
@@ -33,23 +44,12 @@ class OrdersController < ApplicationController
 
 
   def update
-    if params["order"].length == 1 && params["order"]["server"] = ""
-      if @order.server == nil
-        @order.update_attribute(:server, current_user.id)
-          respond_to do |format|
-          format.html { }
-          format.js
-        end
-      end
-      
+    if @order.update_attributes(order_params)
+      flash[:success] = "修改成功！"
+      redirect_to @order
     else
-      if @order.update_attributes(order_params)
-        flash[:success] = "修改成功！"
-        redirect_to @order
-      else
-        flash[:danger] = "修改失败！"
-        render :edit
-      end
+      flash[:danger] = "修改失败！"
+      render :edit
     end
   end
 
@@ -74,7 +74,7 @@ class OrdersController < ApplicationController
     end
 
     def order_params
-      params.require(:order).permit(:title, :content, :deadline, :location, :phone, :status, :total)
+      params.require(:order).permit(:title, :content, :deadline, :location, :phone, :status, :total, :server)
     end
     
 end

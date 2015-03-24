@@ -13,12 +13,17 @@
   </div>
   <div><%= User.find_by_id(order.server).name if order.server %></div>
   <div class="order-btns">
-    <button>More</button>
+    <span><%= link_to 'More', order %></span>
+    <span><%= button_to 'Get it', { 
+                              :controller => "orders",
+                              :action => "get_order",
+                              :user_id => current_user.id,
+                              :order => order
+                            },
+                        remote: true,
+                        class:"btn btn-large btn-primary" %>
+    </span>
 
-    <%= form_for(order, remote: true) do |f| %>
-      <%= f.hidden_field :server %>
-      <%= f.submit "Do It", class:"" %>
-    <% end %>
   </div>
 </div>
 
