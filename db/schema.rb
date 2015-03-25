@@ -11,16 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150322082233) do
+ActiveRecord::Schema.define(version: 20150325123410) do
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "user_id"
-    t.boolean  "read",        default: false
+    t.boolean  "read",       default: false
     t.string   "content"
-    t.string   "sender_name"
-    t.string   "link_back"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.integer  "order_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"
@@ -39,6 +38,13 @@ ActiveRecord::Schema.define(version: 20150322082233) do
     t.datetime "updated_at",                         null: false
   end
 
+  add_index "orders", ["deadline"], name: "index_orders_on_deadline"
+  add_index "orders", ["location"], name: "index_orders_on_location"
+  add_index "orders", ["phone"], name: "index_orders_on_phone"
+  add_index "orders", ["server"], name: "index_orders_on_server"
+  add_index "orders", ["status"], name: "index_orders_on_status"
+  add_index "orders", ["title"], name: "index_orders_on_title"
+  add_index "orders", ["total"], name: "index_orders_on_total"
   add_index "orders", ["user_id"], name: "index_orders_on_user_id"
 
   create_table "users", force: :cascade do |t|

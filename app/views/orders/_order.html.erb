@@ -1,28 +1,27 @@
 <div class="order-card">
-  <div class="order-head"><%= order.user.name %>
+  <div class="order-head">
+    <span class="order-name"><%= order.user.name %></span>
     <span class="order-title"><%= order.title %></span>
-    <span class="order-total"><%= order.total %></span>
+    <span class="order-total">￥<%= order.total %></span>
   </div>
 
   <div class="order-content"><%= order.content %></div>
   
   <div class="order-foot">
-    <%= order.deadline %>
-    <%= order.location %>
-    <%= order.status %>
+    <span class="order-deadline"><%= '尽快送达' if order.deadline == 0 %></span> <br />
+    <span class="order-location"><%= order.location %></span>
   </div>
-  <div><%= User.find_by_id(order.server).name if order.server %></div>
+  <div><%= '接单员：' + User.find_by_id(order.server).name if order.server %></div>
   <div class="order-btns">
-    <span><%= link_to 'More', order %></span>
-    <span><%= button_to 'Get it', { 
+    <%= link_to '详情', order %>
+    <%= button_to '接单', { 
                               :controller => "orders",
                               :action => "get_order",
                               :user_id => current_user.id,
                               :order => order
                             },
                         remote: true,
-                        class:"btn btn-large btn-primary" %>
-    </span>
+                        class:"btn btn-large btn-primary get-order" %>
 
   </div>
 </div>

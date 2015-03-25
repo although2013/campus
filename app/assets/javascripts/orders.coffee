@@ -1,5 +1,6 @@
-$(document).on "page:change", ->
-  $(".get_order").on("ajax:success", (e, data, status, xhr) ->
+$(document).on "ajax:success", "form", (xhr, data, response) ->
+  if data.error
+    $('#right-panel').append('<div>' + data.error + '</div>')
 
-  ).on "ajax:error", (e, xhr, status, error) ->
-    alert("get_order失败")
+
+$(document).on "ajax:error", "form", (xhr, data, response) ->

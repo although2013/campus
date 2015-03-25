@@ -1,3 +1,7 @@
+.main {
+  margin-top: 20px;
+}
+
 .new-order {
   max-width: 365px;
   margin-left: auto;
@@ -12,7 +16,7 @@
   max-width:350px;
 }
 
-.new-order > h2 {
+.new-order h2 {
   text-align: center;
 }
 
@@ -21,12 +25,44 @@
 }
 
 .order-card {
+  padding: 5px 5px 5px 8px;
   margin-left: auto;
   margin-right: auto;
   max-width: 400px;
-  background-color: #CFE4FF;
+  background-color: white;
+  border-radius: 3px;
 }
 
-.order-card > .order-name {
-  font: bold;
+.order-card .order-name {
+  font-weight: 700;
+}
+
+.order-card .order-total {
+  font-weight: 700;
+}
+
+.order-card .order-location {
+  font-weight: 700;
+}
+
+#right-panel {
+  background-color: white;
+  float: right;
+}
+
+
+
+.get-order {
+  display: inline;
+  padding: 3px 7px;
+  border-radius: 2px;
+}
+
+form.button_to {
+  margin-left: 10px;
+  display: inline;
+}
+
+form.button_to input {
+  display: inline;
 }

@@ -1,4 +1,10 @@
 <div id="right-panel">
-  
-  
+  <% if @my_servers %>
+    <% @my_servers.each do |item| %>
+      <div class="serving-item">
+        <%= item.title %>
+        <%= item.location %>
+      </div>
+    <% end %>
+  <% end %>
 </div>

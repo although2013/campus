@@ -4,10 +4,8 @@ class CreateNotifications < ActiveRecord::Migration
       t.belongs_to :user, index: true
 
       t.boolean :read, default: false
-      t.string :content
-      t.string :sender_name
-      t.string :link_back
-
+      t.string  :content
+      t.integer :order_id
 
       t.timestamps null: false
     end
