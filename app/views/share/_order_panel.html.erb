@@ -1,0 +1,19 @@
+<div id="order-panel">
+  <% if @my_servers %>
+    <div class="panel-head">你已接单：</div>
+
+    <% @my_servers.each do |item| %>
+      <hr>
+      <div class="serving-item">
+        <span class="order-title"><%= item.title %></span>
+        <span class="order-total">￥<%= item.total %></span>
+
+        
+        <div class="second-line">
+          <span class="order-location"><%= item.location %></span>
+          <span class="more"><%= link_to '详情', order_path(item) %></span>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

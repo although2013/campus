@@ -1,8 +1,10 @@
-<div id="information"></div>
+<div class="contrainer">
 
-<%= render 'share/right_panel' %>
+<div id="main" class="container-fluid">
+  <%= render 'share/order_panel' %>
 
-<div class="main">
-  <%= render @orders %>
+  <div class="orders">
+    <%= render @orders %>
+  </div>
 </div>
-
+</div>

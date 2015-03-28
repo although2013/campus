@@ -1,6 +1,8 @@
-.main {
+.orders {
   margin-top: 20px;
+  margin-left: 300px;
 }
+
 
 .new-order {
   max-width: 365px;
@@ -31,9 +33,14 @@
   max-width: 400px;
   background-color: white;
   border-radius: 3px;
+
 }
 
-.order-card .order-name {
+.order-card .order-content {
+  margin: 10px 5px 10px 5px;
+}
+
+.order-card .order-title {
   font-weight: 700;
 }
 
@@ -41,12 +48,66 @@
   font-weight: 700;
 }
 
+.order-card .order-btns {
+  margin-top: 9px;
+}
+
 .order-card .order-location {
+  margin-left: 20px;
+}
+
+.order-name {
   font-weight: 700;
 }
 
-#right-panel {
+.order-total {
+  font-weight: 700;
+  color: green;
+  float: right;
+}
+
+.order-location {
+  font-weight: 700;
+}
+
+
+
+#order-panel {
+  margin: 20px 0px 10px 20px;
+  padding: 5px 5px 20px 5px;
   background-color: white;
+  min-width: 230px;
+  display: block;
+  float: left;
+}
+
+#order-panel .panel-head {
+  padding-top: 5px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+#order-panel .order-title {
+  max-width: 100px;
+} 
+
+#order-panel .order-total {
+  margin-left: 10px;
+}
+
+
+
+.serving-item {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.serving-item .second-line {
+  margin-top: 7px;
+}
+
+.serving-item .more {
   float: right;
 }
 

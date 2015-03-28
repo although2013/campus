@@ -1,1 +1,1 @@
-$('#right-panel').append('<div class="serving-item"><%= @order.title %><%= @order.location %></div>')
+$('#order-panel').append('<hr><div class="serving-item"><span class="order-title"><%= @order.title %></span><span class="order-total">￥<%= @order.total %></span><div class="second-line"><span class="order-location"><%= @order.location %></span><span class="more"><%= link_to \'详情\', order_path(@order) %></span></div></div>')
