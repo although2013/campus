@@ -1,7 +1,8 @@
-<%= @order.title    %> <br/>
-<%= @order.content  %> <br/>
-<%= @order.phone    %> <br/>
-<%= @order.deadline %> <br/>
-<%= @order.location %> <br/>
-<%= @order.total    %> <br/>
-<%= @order.user.name     %>
+雇主:<strong><%= @order.user.name  %></strong><br/>
+任务标题:<strong><%= @order.title      %></strong> <br/>
+详细内容:<strong><%= @order.content    %></strong> <br/>
+雇主电话:<strong><%= parse_phone(@order.phone)      %></strong> <br/>
+截止时间:<strong><%= @order.deadline.strftime('%Y年%m月%d日 %H:%M:%S') %></strong> <br/>
+创建时间:<strong><%= @order.created_at.strftime('%Y年%m月%d日 %H:%M:%S') %></strong> <br/>
+接头地点:<strong><%= @order.location   %></strong> <br/>
+交易金额:<strong>￥<%= @order.total      %></strong> <br/>

@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20150325123410) do
     t.integer  "user_id"
     t.string   "title"
     t.text     "content"
-    t.integer  "deadline"
+    t.datetime "deadline"
     t.string   "location"
     t.string   "phone"
     t.string   "status"

@@ -1,6 +1,7 @@
 .orders {
   margin-top: 20px;
   margin-left: 300px;
+  margin-right: 210px;
 }
 
 
@@ -56,6 +57,10 @@
   margin-left: 20px;
 }
 
+.order-card .order-total {
+  margin-right: 10px;
+}
+
 .order-name {
   font-weight: 700;
 }
@@ -79,6 +84,7 @@
   min-width: 230px;
   display: block;
   float: left;
+  border-radius: 3px;
 }
 
 #order-panel .panel-head {
@@ -103,12 +109,17 @@
   padding-right: 10px;
 }
 
-.serving-item .second-line {
-  margin-top: 7px;
+.serving-item .order-location{
+  margin-top: 10px;
 }
 
+.serving-item .btn-line{
+  margin-top: 10px;
+}
+
+
 .serving-item .more {
-  float: right;
+  margin-left: 15px;
 }
 
 
@@ -117,13 +128,30 @@
   display: inline;
   padding: 3px 7px;
   border-radius: 2px;
+  margin-left: 15px;
+}
+
+.cancel-order {
+  display: inline;
+  padding: 3px 7px;
+  border-radius: 2px;
 }
 
 form.button_to {
-  margin-left: 10px;
   display: inline;
 }
 
 form.button_to input {
   display: inline;
+}
+
+#information {
+  position: fixed !important; 
+
+  right: 0; 
+  top: 30%; 
+}
+
+#information .alert {
+  width: 200px;
 }

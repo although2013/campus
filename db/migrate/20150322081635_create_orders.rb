@@ -5,7 +5,7 @@ class CreateOrders < ActiveRecord::Migration
 
       t.string     :title
       t.text       :content
-      t.integer    :deadline
+      t.datetime   :deadline
       t.string     :location
       t.string     :phone
       t.string     :status

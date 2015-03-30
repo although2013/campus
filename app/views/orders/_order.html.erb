@@ -9,7 +9,7 @@
     <div class="order-content well"><%= order.content %></div>
   
     <div class="order-foot">
-      <span class="order-deadline"><%= '尽快送达' if order.deadline == 0 %></span>
+      <span class="order-deadline <%= 'time-down' if order.deadline != 0 %>"><%= dead_line_type(order.deadline) %></span>
       <span class="order-location"><%= order.location %></span>
     </div>
     <div class="order-btns">

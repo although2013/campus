@@ -1,5 +1,5 @@
-<div id="order-panel">
-  <% if @my_servers %>
+<% if @my_servers.length > 0 %>
+  <div id="order-panel">
     <div class="panel-head">你已接单：</div>
 
     <% @my_servers.each do |item| %>
@@ -8,12 +8,24 @@
         <span class="order-title"><%= item.title %></span>
         <span class="order-total">￥<%= item.total %></span>
 
-        
-        <div class="second-line">
-          <span class="order-location"><%= item.location %></span>
+        <div class="order-location"><%= item.location %></div>
+        <div class="btn-line">
+          
+          <span class="order-cancel">
+
+            <%= button_to '放弃', { 
+                              :controller => "orders",
+                              :action => "cancel_order",
+                              :server_id => current_user.id,
+                              :order => item.id
+                            },
+                        remote: true,
+                        class:"btn btn-large btn-danger cancel-order" %>
+
+          </span>
           <span class="more"><%= link_to '详情', order_path(item) %></span>
         </div>
       </div>
     <% end %>
-  <% end %>
-</div>
+  </div>
+<% end %>

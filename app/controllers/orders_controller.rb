@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
 
   def index
-    @orders = Order.includes(:user).all
+    @orders = Order.includes(:user).where(['deadline > ? AND server IS NULL', Time.now])
     if current_user
       @my_servers = Order.where(:server => current_user.id).limit(5)
     end
@@ -40,6 +40,21 @@ class OrdersController < ApplicationController
     end
   end
 
+  def cancel_order
+    order = Order.find(params[:order])
+    if current_user && current_user.id == order.server
+      order.update_attribute(:server, nil)
+
+      respond_to do |format|
+        format.js {render inline: "location.reload();" }
+      end
+    else
+      respond_to do |format|
+        format.json { render :json => { :error => '取消订单出错' } }
+      end
+    end
+  end
+
 
   def create
     @order = current_user.orders.build(order_params)
@@ -69,7 +84,7 @@ class OrdersController < ApplicationController
     if @order.user == current_user
       @order.destroy
       respond_to do |format|
-        format.html { redirect_to orders_url, success: 'User was successfully destroyed.' }
+        format.html { redirect_to orders_url, success: 'Order was successfully destroyed.' }
         format.json { head :no_content }
       end
     else
