@@ -5,35 +5,53 @@
 #= require_tree .
 #= require_self
 
-time_down = () ->
-  if $(".time-down").length
 
-    time_now = parseInt(Date.now() / 1000)
-    $(".time-down").each ->
-      del = (parseInt($(this).text()) - time_now)
+count_down_1_sec = (h,m,s) ->
+  time = h * 3600 + m * 60 + s
+  time = time - 1
+  if time <= 0
+    return ""
+  h = parseInt(time / 3600)
+  m = parseInt((time / 60) % 60)
+  s = parseInt(time % 60)
+  if h == 0
+    str =  "还剩：" + check_num(m) + '分' + check_num(s) + '秒'
+  else
+    str =  "还剩：" + check_num(h) + '小时' + check_num(m) + '分' + check_num(s) + '秒'
+  return str
 
-      s = parseInt(del %60)
-      m = parseInt((del /60) % 60)
-      h = parseInt(del /3600)
-
-      s = check_zero(s) + '秒'
-      m = check_zero(m) + '分'
-      h = check_zero(h) + '小时'
-
-      str = "还剩: " + h + m + s
-      $(this).text(str)
-
-check_zero = (num) ->
-  if num == 0
-    num = "00"
-  else if num < 10
+check_num = (num) ->
+  if num < 10
     num = "0" + num
-
   return num
 
+time_down = (selector) ->
+  console.log("x", $(selector).length)
+  if $(selector).length
+
+    $(selector).each ->
+
+      if $(this).text().length == 13
+        h = parseInt($(this).text().slice(3,5))
+        m = parseInt($(this).text().slice(7,9))
+        s = parseInt($(this).text().slice(10,12))
+        str = count_down_1_sec(h,m,s)
+        $(this).text(str)
+      else if $(this).text().length == 9
+        m = parseInt($(this).text().slice(3,5))
+        s = parseInt($(this).text().slice(6,8))
+        str = count_down_1_sec(0,m,s)
+        if str.length > 5
+          $(this).text(str)
+        else
+          $(this).text("已经截止...")
+    t=setTimeout(()->
+      time_down(selector)
+    ,1000);
 
 
 
 $(document).on 'page:change', ->
-  time_down()
+  time_down('.time-down')
+
   
