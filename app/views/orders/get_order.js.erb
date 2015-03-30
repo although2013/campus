@@ -1,1 +1,7 @@
-$('#order-panel').append('<hr><div class="serving-item"><span class="order-title"><%= @order.title %></span><span class="order-total">￥<%= @order.total %></span><div class="second-line"><span class="order-location"><%= @order.location %></span><span class="more"><%= link_to \'详情\', order_path(@order) %></span></div></div>')
+if (!$('#order-panel').length) {
+  $('#main').prepend('<div id="order-panel"><div class="panel-head">你已接单：</div></div>');
+};
+
+$('#order-panel').append('<hr><div class="serving-item"><span class="order-title"><%= @order.title %></span><span class="order-total">￥<%= @order.total %></span><div class="second-line"><span class="order-location"><%= @order.location %></span><span class="order-cancel"><%= button_to "放弃", { :controller => "orders",:action => "cancel_order",:server_id => current_user.id,:order => @order.id},remote: true,class:"btn btn-large btn-danger cancel-order" %></span><span class="more"><%= link_to "详情", order_path(@order) %></span></div></div>')
+
+
