@@ -1,10 +1,11 @@
-
-
 dispatcher = new WebSocketRails('localhost:3000/websocket');
 
-
 channel = dispatcher.subscribe('orders');
-channel.bind('get_order', (server)->
-  console.log('User: ' + server + ' get your order!');
+
+channel.bind('new_order', (user) ->
+  if !($('#newest-order').length)
+    $('.orders').prepend('<div id="newest-order">' + user + ' 发布了新的任务</div>')
+  else
+    $('#newest-order').html(user + ' 发布了新的任务')
 )
 

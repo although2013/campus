@@ -28,9 +28,7 @@ class OrdersController < ApplicationController
       if @order.server == nil
         @order.update_attribute(:server, current_user.id)
         Notification.create(user_id: @order.user_id, order_id: @order.id, content: "你的订单##{@order.id},被接单啦!")
-        #WebsocketRails[:orders].trigger 'get_order', current_user.name
 
-        WebsocketRails.users[@order.user_id].send_message('get_order', current_user.name)
         respond_to do |format|
           format.html
           format.js
@@ -62,6 +60,7 @@ class OrdersController < ApplicationController
   def create
     @order = current_user.orders.build(order_params)
     if @order.save
+      WebsocketRails[:orders].trigger 'new_order', current_user.name
       flash[:success] = "任务发布成功！"
       redirect_to @order
     else

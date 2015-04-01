@@ -2,10 +2,9 @@ WebsocketRails::EventMap.describe do
   # You can use this file to map incoming events to controller actions.
   # One event can be mapped to any number of controller actions. The
   # actions will be executed in the order they were subscribed.
-  #
-  #namespace :orders do
-    subscribe :get_order, to: OrdersController, :with_method => :get_order
-  #end
+
+  subscribe :new_order, to: OrdersController, :with_method => :create
+  
   # Uncomment and edit the next line to handle the client connected event:
   #   subscribe :client_connected, :to => Controller, :with_method => :method_name
   #
