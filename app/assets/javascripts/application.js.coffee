@@ -2,6 +2,7 @@
 #= require jquery_ujs
 #= require turbolinks
 #= require bootstrap
+#= require websocket_rails/main
 #= require_tree .
 #= require_self
 
@@ -26,7 +27,6 @@ check_num = (num) ->
   return num
 
 time_down = (selector) ->
-  console.log("x", $(selector).length)
   if $(selector).length
 
     $(selector).each ->
@@ -53,5 +53,3 @@ time_down = (selector) ->
 
 $(document).on 'page:change', ->
   time_down('.time-down')
-
-  

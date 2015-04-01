@@ -27,11 +27,12 @@ class OrdersController < ApplicationController
     if current_user && current_user == User.find(params[:user_id])
       if @order.server == nil
         @order.update_attribute(:server, current_user.id)
+        Notification.create(user_id: @order.user_id, order_id: @order.id, content: "你的订单##{@order.id},被接单啦!")
+
         respond_to do |format|
           format.html
           format.js
         end
-        Notification.create(user_id: @order.user_id, order_id: @order.id, content: "你的订单##{@order.id},被接单啦!")
       else
         respond_to do |format|
           format.json { render :json => { :error => '该订单已被他人获取' } }
@@ -59,6 +60,7 @@ class OrdersController < ApplicationController
   def create
     @order = current_user.orders.build(order_params)
     if @order.save
+      WebsocketRails[:orders].trigger 'new_order', current_user.name
       flash[:success] = "任务发布成功！"
       redirect_to @order
     else
