@@ -1,19 +1,24 @@
 <div class="new-order">
 <h2>发布商品</h2>
-</br>
+<br />
+<div id="show-time-diff"></div>
 
 <%= form_for(@order) do |f| %>
 
       <%= f.label '标题' %>
       <%= f.text_field :title, autofocus: true, placeholder:"任务的标题", class:"form-control" %>
-    
-  
+
       <%= f.label '详细' %>
       <%= f.text_area :content, placeholder:"具体描述任务", class:"form-control" %>
-    
-  
+
       <%= f.label '截止时间' %>
-      <%= f.datetime_local_field :deadline, placeholder:"", class:"form-control" %>
+
+      <div class='input-group date' id='datetimepicker'>
+        <%= f.text_field :deadline, placeholder:"", class:"form-control" %>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
 
       <%= f.label '位置' %>
       <%= f.text_field :location, placeholder:"需要送达何处", class:"form-control" %>

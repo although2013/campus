@@ -17,5 +17,5 @@ ADD
 Get Order failed ->
 把informatoin 放右边，固定于窗口什么的，
 
-![Demo Picture](https://github.com/although2013/campus/raw/master/demo_picture.png)
+![Demo Picture](http://although2013.com/uploads/pictures/detail_2015-03-30_19_08_26____.png)
 

@@ -3,8 +3,11 @@
 #= require turbolinks
 #= require bootstrap
 #= require websocket_rails/main
+#= require moment
+#= require bootstrap-datetimepicker
 #= require_tree .
 #= require_self
+
 
 
 count_down_1_sec = (h,m,s) ->
@@ -45,11 +48,43 @@ time_down = (selector) ->
           $(this).text(str)
         else
           $(this).text("已经截止...")
-    t=setTimeout(()->
+    time_down_in=setTimeout(()->
       time_down(selector)
     ,1000);
+    $(document).one 'page:change', ->
+      clearInterval time_down_in
+
+
+time_picker_func = () ->
+  if $('#datetimepicker').length
+    $('#datetimepicker').datetimepicker({
+      inline: false,
+      sideBySide: true,
+      format: 'YYYY/MM/DD HH:mm',
+      extraFormats: [ 'YYYY/MM/DD HH:mm' ]
+    });
+
+
+time_picker_know = () ->
+  if $('#show-time-diff').length
+    t = $('#datetimepicker input').val()
+    if t != ""
+      s = moment(t, "YYYY/MM/DD HH:mm")
+      del = parseInt((s.toDate() - moment().toDate())/1000)
+      h = parseInt(del / 3600)
+      m = parseInt((del / 60) % 60)
+      s = parseInt(del % 60)
+      str = count_down_1_sec(h,m,s)
+      $('#show-time-diff').text(str)
+    time_picker_know_in=setTimeout(time_picker_know, 900);
+    $(document).one 'page:change', ->
+      clearInterval time_picker_know_in
 
 
 
 $(document).on 'page:change', ->
   time_down('.time-down')
+  time_picker_func()
+
+
+
