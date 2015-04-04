@@ -4,11 +4,11 @@
   <%= render 'share/order_panel' %>
 
   <% if @my_servers && @my_servers.length > 0 %>
-    <div class="col-sm-8 orders col-centered">
+    <div class="col-sm-8 orders">
       <%= render @orders %>
     </div>
   <% else %>
-    <div class="col-sm-12 col-centered orders">
+    <div class="col-sm-12 orders">
       <%= render @orders %>
     </div>
   <% end %>
