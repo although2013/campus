@@ -1,17 +1,25 @@
 <div class="main">
-<div class="container-fluid">
-<div class="row">
-  <%= render 'share/order_panel' %>
+  <div class="container-fluid">
+    <div class="row">
 
-  <% if @my_servers && @my_servers.length > 0 %>
-    <div class="col-sm-8 orders">
-      <%= render @orders %>
+
+<div class="col-sm-1 "></div>
+
+      <%= render 'share/order_panel' %>
+
+<div class="col-sm-1 "></div>
+
+      <% if @my_servers && @my_servers.length > 0 %>
+        <div class="col-sm-6 orders">
+          <%= render @orders %>
+        </div>
+      <% else %>
+        <div class="centered orders">
+          <%= render @orders %>
+        </div>
+      <% end %>
+
+<div class="col-sm-1 "></div>
     </div>
-  <% else %>
-    <div class="col-sm-12 orders">
-      <%= render @orders %>
-    </div>
-  <% end %>
-</div>
-</div>
+  </div>
 </div>

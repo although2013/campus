@@ -1,6 +1,6 @@
 if (!$('#order-panel').length) {
-  $(".orders").removeClass("col-sm-12").addClass("col-sm-8")
-  $('#main').prepend('<div id="order-panel" class="col-sm-4"><div class="panel-head">你已接单：</div></div>');
+  $(".orders").removeClass("centered").addClass("col-sm-6")
+  $('.main .row').prepend('<div id="order-panel" class="col-sm-4"><div class="panel-head">你已接单：</div></div>');
 };
 
 $('#order-panel').append('<hr><div class="serving-item"><span class="order-title"><%= @order.title %></span><span class="order-total">￥<%= @order.total %></span><div class="order-location"><%= @order.location %></div><div class="btn-line"><span class="order-cancel"><%= button_to "放弃", { :controller => "orders",:action => "cancel_order",:server_id => current_user.id,:order => @order.id},remote: true,class:"btn btn-large btn-danger cancel-order" %></span><span class="more"><%= link_to "详情", order_path(@order) %></span></div></div>')
