@@ -11,6 +11,7 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @server = User.find(@order.server) if !@order.server.blank?
   end
 
 

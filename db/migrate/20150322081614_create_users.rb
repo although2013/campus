@@ -7,6 +7,10 @@ class CreateUsers < ActiveRecord::Migration
       t.string :password_digest
       t.string :remember_token
 
+      t.integer :score, default: 100
+      t.integer :quantity, default: 0
+
+
       t.timestamps null: false
     end
     add_index :users, :email, unique: true
