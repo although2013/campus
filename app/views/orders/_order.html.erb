@@ -1,4 +1,4 @@
-<div class="order-card">
+<div class='order-card <%= "order#{order.id}" %>'>
   <div class="order-head">
     <span class="order-title"><%= order.title %></span>
     
@@ -6,7 +6,7 @@
   </div>
 
 
-    <div class="order-content well"><%= order.content %></div>
+  <div class="order-content well"><%= order.content %></div>
   
     <div class="order-foot">
       <span class="order-deadline <%= 'time-down' if order.deadline != 0 %>"><%= dead_line_type(order.deadline) %></span>
@@ -22,9 +22,10 @@
                               :order => order
                             },
                         remote: true,
-                        class:"btn btn-large btn-primary get-order" %>
+                        class:"btn btn-large btn-primary get-order",
+                        autocomplete:"off" %>
       <% else %>
-        <button type="button" class="btn btn-primary get-order" disabled="disabled">登录后可接单</button>
+      <%= link_to '登录后可接单', new_session_path, class:"btn btn-primary get-order" %>
       <% end %>
     </div>
 

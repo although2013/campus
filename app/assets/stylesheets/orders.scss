@@ -1,9 +1,24 @@
-.orders {
-  margin-top: 20px;
-  margin-left: 300px;
-  margin-right: 210px;
+.main {
+  margin-top: 5px;
+  margin-left: 15px;
 }
 
+.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.orders {
+  margin-top:25px;
+}
+
+#order-panel {
+  padding: 15px 8px 15px 8px;
+  margin-top: 25px;
+  background-color: white;
+
+  border-radius: 3px;
+}
 
 .new-order {
   max-width: 365px;
@@ -28,10 +43,8 @@
 }
 
 .order-card {
-  padding: 5px 5px 5px 8px;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 400px;
+  padding: 10px 10px 10px 10px;
+
   background-color: white;
   border-radius: 3px;
 
@@ -77,15 +90,7 @@
 
 
 
-#order-panel {
-  margin: 20px 0px 10px 20px;
-  padding: 5px 5px 20px 5px;
-  background-color: white;
-  min-width: 230px;
-  display: block;
-  float: left;
-  border-radius: 3px;
-}
+
 
 #order-panel .panel-head {
   padding-top: 5px;
@@ -148,8 +153,8 @@ form.button_to input {
 #information {
   position: fixed !important; 
 
-  right: 0; 
-  top: 30%; 
+  right: 0;
+  top: 30%;
 }
 
 #information .alert {

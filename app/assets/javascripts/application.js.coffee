@@ -31,18 +31,17 @@ check_num = (num) ->
 
 time_down = (selector) ->
   if $(selector).length
-
     $(selector).each ->
-
-      if $(this).text().length == 13
-        h = parseInt($(this).text().slice(3,5))
-        m = parseInt($(this).text().slice(7,9))
-        s = parseInt($(this).text().slice(10,12))
+      arr = $(this).text().match(/\d+/g)
+      if $(this).text().length >= 13
+        h = parseInt(arr[0])
+        m = parseInt(arr[1])
+        s = parseInt(arr[2])
         str = count_down_1_sec(h,m,s)
         $(this).text(str)
       else if $(this).text().length == 9
-        m = parseInt($(this).text().slice(3,5))
-        s = parseInt($(this).text().slice(6,8))
+        m = parseInt(arr[0])
+        s = parseInt(arr[1])
         str = count_down_1_sec(0,m,s)
         if str.length > 5
           $(this).text(str)

@@ -4,6 +4,7 @@ WebsocketRails::EventMap.describe do
   # actions will be executed in the order they were subscribed.
 
   subscribe :new_order, to: OrdersController, :with_method => :create
+  subscribe :order_gotten, to: OrdersController, :with_method => :get_order
   
   # Uncomment and edit the next line to handle the client connected event:
   #   subscribe :client_connected, :to => Controller, :with_method => :method_name

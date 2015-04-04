@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
       if @order.server == nil
         @order.update_attribute(:server, current_user.id)
         Notification.create(user_id: @order.user_id, order_id: @order.id, content: "你的订单##{@order.id},被接单啦!")
-
+        WebsocketRails[:orders].trigger 'order_gotten', @order.id
         respond_to do |format|
           format.html
           format.js

@@ -9,3 +9,8 @@ channel.bind('new_order', (user) ->
     $('#newest-order').html(user + ' 发布了新的任务')
 )
 
+channel.bind('order_gotten', (order_id) ->
+  selector = '.order' + order_id
+  if ($(selector).length)
+    $((selector + ' .button_to .btn')).val('已被接单').prop('disabled', true);
+)
