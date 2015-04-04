@@ -90,9 +90,6 @@
 }
 
 
-
-
-
 #order-panel .panel-head {
   padding-top: 5px;
   text-align: center;
@@ -160,4 +157,15 @@ form.button_to input {
 
 #information .alert {
   width: 200px;
+}
+
+#newest-order a {
+  background-color: #dff0d8;
+  color:#3c763d;
+  margin: 5px 0 5px;
+  padding: 10px 0 10px;
+  text-align: center;
+  font-size: 15px;
+  border-radius: 3px;
+  display:block;
 }

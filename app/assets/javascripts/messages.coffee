@@ -4,9 +4,11 @@ channel = dispatcher.subscribe('orders');
 
 channel.bind('new_order', (user) ->
   if !($('#newest-order').length)
-    $('.orders').prepend('<div id="newest-order">' + user + ' 发布了新的任务</div>')
+    $('.orders').prepend("<div id='newest-order'><a href='/orders'>查看最新的 1 个任务</a></div>")
   else
-    $('#newest-order').html(user + ' 发布了新的任务')
+    s = $('#newest-order').text().match(/\d+/g).pop()
+    n = parseInt(s) + 1
+    $('#newest-order').html("<a href='/orders'>查看最新的 #{n} 个任务</a>")
 )
 
 channel.bind('order_gotten', (order_id) ->
