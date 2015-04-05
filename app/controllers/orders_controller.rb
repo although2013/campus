@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
 
+
   def index
     @orders = Order.includes(:user).where(['deadline > ? AND server IS NULL', Time.now])
     if current_user
@@ -25,9 +26,12 @@ class OrdersController < ApplicationController
 
   def get_order
     @order = Order.find(params[:order])
+    status = "serving"
     if current_user && current_user == User.find(params[:user_id])
       if @order.server == nil
-        @order.update_attribute(:server, current_user.id)
+        process = order_process(@order, current_user)
+        @order.update_attributes(:server => current_user.id, :status => status, :process => process)
+        current_user.update_attribute(:quantity, (current_user.quantity + 1))
         Notification.create(user_id: @order.user_id, order_id: @order.id, content: "你的订单##{@order.id},被接单啦!")
         WebsocketRails[:orders].trigger 'order_gotten', @order.id
         respond_to do |format|
@@ -44,9 +48,11 @@ class OrdersController < ApplicationController
 
   def cancel_order
     order = Order.find(params[:order])
+    status = "terminated"
+    process = order_process(order, current_user)
     if current_user && current_user.id == order.server
-      order.update_attribute(:server, nil)
-
+      order.update_attributes(:server => nil, :status => status, :process => process)
+      current_user.update_attribute(:terminated_count, (current_user.terminated_count + 1))
       respond_to do |format|
         format.js {render inline: "location.reload();" }
       end
@@ -60,10 +66,12 @@ class OrdersController < ApplicationController
 
   def create
     @order = current_user.orders.build(order_params)
+    @order.status = "waiting"
+    @order.process = order_process(@order, current_user)
     if @order.save
-      WebsocketRails[:orders].trigger 'new_order', current_user.name
       flash[:success] = "任务发布成功！"
       redirect_to @order
+      WebsocketRails[:orders].trigger 'new_order', current_user.name
     else
       flash[:danger] = "任务发布失败！"
       render :new
@@ -102,7 +110,15 @@ class OrdersController < ApplicationController
     end
 
     def order_params
-      params.require(:order).permit(:title, :content, :deadline, :location, :phone, :status, :total, :server)
+      params.require(:order).permit(:title, :content, :deadline, :location, :phone, :total)
     end
-    
+
+    def order_process(order, user)
+      status_moment = Time.now
+      if order.process.blank?
+        "#{order.status}:#{status_moment},##{user.id}:#{user.name}\n"
+      else
+        "#{order.process},#{order.status}:#{status_moment},##{user.id}:#{user.name}\n"
+      end
+    end
 end

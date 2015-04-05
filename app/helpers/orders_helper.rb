@@ -1,5 +1,5 @@
 module OrdersHelper
-  def dead_line_type(dead_line)
+  def dead_line_str(dead_line)
     case dead_line
     when 0
       "尽快送达"
@@ -36,4 +36,5 @@ module OrdersHelper
   def parse_phone(phone)
     "#{phone[0..2]}-#{phone[3..6]}-#{phone[7..10]}"
   end
+
 end

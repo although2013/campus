@@ -12,6 +12,8 @@ class CreateOrders < ActiveRecord::Migration
       t.integer    :server
       t.decimal    :total, precision: 8, scale: 2
 
+      t.text       :process
+
       t.timestamps null: false
     end
   end

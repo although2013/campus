@@ -61,7 +61,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, success: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url, success: '成功删除账户!' }
       format.json { head :no_content }
     end
   end
@@ -77,7 +77,10 @@ class UsersController < ApplicationController
     end
 
     def signed_in_user
-      redirect_to new_session_path, danger: "Please sign in." unless signed_in?
+      unless signed_in?
+        flash[:danger] = "请先登录。"
+        redirect_to new_session_path
+      end
     end
 
     def correct_user
