@@ -22,13 +22,13 @@ Get Order failed ->
 
 ----
 
-    waiting -> serving -------------------  
-                           |             |  
-                       terminated     pending  
-                                         |  
-                                    -------------  
-                                   |             |  
-                                finished       wrong  
+    waiting -> serving --->-->-->-->------  
+                 ^         |             |  
+                 |      terminated     pending  
+                 |         |             |  
+                 |         |       ---<------>----  
+                 <--<-------       |             |  
+               server=>NULL     finished       wrong  
 
 
 前期线下应该在接单后 打电话确认  
@@ -38,7 +38,6 @@ Get Order failed ->
 用户发单，       `Order.status->waiting`  
 接单，           `Order.status->serving`,  `quantity + 1`  
 终止terminated  
-终止的订单就结束了  
 发单者接收到消息，`Order.status->terminated`  
 
 接单并完成，接单员按下完成按钮，发送通知，`Order.status->pending`  

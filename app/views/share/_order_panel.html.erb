@@ -4,14 +4,14 @@
 
     <% @my_servers.each do |item| %>
       <hr>
-      <div class="serving-item">
+      <div class="serving-item <%= "order#{item.id}" %>">
         <span class="order-title"><%= item.title %></span>
         <span class="order-total">￥<%= item.total %></span>
 
         <div class="order-location"><%= item.location %></div>
         <div class="btn-line">
           
-          <span class="order-cancel">
+          <span class="order-btn">
 
             <%= button_to '放弃', { 
                               :controller => "orders",
@@ -24,6 +24,15 @@
 
           </span>
           <span class="more"><%= link_to '详情', order_path(item) %></span>
+          <span class="order-btn">
+          <%= button_to '我完成了', {
+                              :controller => "orders",
+                              :action => "pending_order",
+                              :order => item.id
+                            },
+                        remote: true,
+                        class:"btn btn-large btn-success pending-order" %>
+          </span>
         </div>
       </div>
     <% end %>
