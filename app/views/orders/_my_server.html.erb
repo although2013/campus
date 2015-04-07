@@ -4,26 +4,26 @@
   <span class="order-total">￥<%= item.total %></span>
   <div class="order-location"><%= item.location %></div>
   <div class="btn-line">
-    
+
     <span class="order-btn">
-      <%= button_to '放弃', { 
-                        :controller => "orders",
-                        :action => "cancel_order",
-                        :server_id => current_user.id,
-                        :order => item.id
-                      },
-                  remote: true,
-                  class:"btn btn-large btn-danger cancel-order" %>
+      <%= button_to '放弃', {
+                              :controller => "orders",
+                              :action => "cancel_order",
+                              :server_id => current_user.id,
+                              :order => item.id
+                            },
+                          remote: true,
+                          class:"btn btn-large btn-danger cancel-order" %>
     </span>
     <span class="more"><%= link_to '详情', order_path(item) %></span>
     <span class="order-btn">
     <%= button_to '我完成了', {
-                        :controller => "orders",
-                        :action => "pending_order",
-                        :order => item.id
-                      },
-                  remote: true,
-                  class:"btn btn-large btn-success pending-order" %>
+                                :controller => "orders",
+                                :action => "pending_order",
+                                :order => item.id
+                              },
+                            remote: true,
+                            class:"btn btn-large btn-success pending-order" %>
     </span>
   </div>
 </div>

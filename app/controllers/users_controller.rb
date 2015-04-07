@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @orders = @user.orders.all
   end
 
 

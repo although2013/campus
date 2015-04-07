@@ -1,0 +1,29 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>  
+      <th>Title</th>
+      <th>deadline</th>
+      <th>created_at</th>
+      <th>location</th>
+      <th>status</th>
+      <th>server</th>
+      <th>total</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |item| %>
+      <tr>
+        <td><%= item.id %></td>
+        <td><%= item.title %></td>
+        <td><%= item.deadline.strftime('%y年%m月%d日 %H:%M') %></td>
+        <td><%= item.created_at.strftime('%y年%m月%d日 %H:%M') %></td>
+        <td><%= item.location %></td>
+        <td><%= item.status %></td>
+        <td><%= item.server %></td>
+        <td><%= item.total %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
