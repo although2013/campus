@@ -7,12 +7,12 @@ class OrdersController < ApplicationController
   def index
     @orders = Order.includes(:user).where(['deadline > ? AND server IS NULL', Time.now])
     if current_user
-      @my_servers = Order.where(['server = ? AND status = "serving"', current_user.id]).limit(5)
+      @my_servers = Order.where(['server = ? AND status = "serving"', current_user.name]).limit(5)
     end
   end
 
   def show
-    @server = User.find(@order.server) if !@order.server.blank?
+    @server = User.find_by_name(@order.server) if !@order.server.blank?
   end
 
 
@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:order])
     if @order.status == "serving"
       @order.status = "pending"
-      if current_user && current_user.id == @order.server
+      if current_user && current_user.name == @order.server
         process = order_process(@order, current_user)
         @order.update_attributes(:status => @order.status, :process => process)
         Notification.create(user_id: @order.user_id, order_id: @order.id, content: "你的订单##{@order.id},被接单员确认已完成!")
@@ -36,6 +36,14 @@ class OrdersController < ApplicationController
           format.js
         end
       end
+    end
+  end
+
+  def do_star
+    @order = Order.includes(:user).find(params[:order])
+    if @order.user == current_user
+      @order.update_attribute(:stars, params[:star])
+      render :json => {}
     end
   end
 
@@ -49,7 +57,7 @@ class OrdersController < ApplicationController
         end
       elsif @order.server == nil
         process = order_process(@order, current_user)
-        @order.update_attributes(:server => current_user.id, :status => @order.status, :process => process)
+        @order.update_attributes(:server => current_user.name, :status => @order.status, :process => process)
         current_user.update_attribute(:quantity, (current_user.quantity + 1))
         Notification.create(user_id: @order.user_id, order_id: @order.id, content: "你的订单##{@order.id},被接单啦!")
         WebsocketRails[:orders].trigger 'order_gotten', @order.id
@@ -68,7 +76,7 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:order])
     @order.status = "terminated"
     process = order_process(@order, current_user)
-    if current_user && current_user.id == @order.server
+    if current_user && current_user.name == @order.server
       @order.update_attributes(:server => nil, :status => @order.status, :process => process)
       current_user.update_attribute(:terminated_count, (current_user.terminated_count + 1))
       respond_to do |format|

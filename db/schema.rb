@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325123410) do
+ActiveRecord::Schema.define(version: 20150408134204) do
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -32,11 +32,12 @@ ActiveRecord::Schema.define(version: 20150325123410) do
     t.string   "location",   limit: 255
     t.string   "phone",      limit: 255
     t.string   "status",     limit: 255
-    t.integer  "server",     limit: 4
+    t.string   "server",     limit: 255
     t.decimal  "total",                    precision: 8, scale: 2
     t.text     "process",    limit: 65535
     t.datetime "created_at",                                       null: false
     t.datetime "updated_at",                                       null: false
+    t.integer  "stars",      limit: 4
   end
 
   add_index "orders", ["deadline"], name: "index_orders_on_deadline", using: :btree

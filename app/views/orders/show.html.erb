@@ -3,30 +3,37 @@
   <div class="panel-heading"><strong><%= @order.title %></strong></div>
   <div class="panel-body">
 
-    <div class="item">详细内容:&nbsp;&nbsp;&nbsp;<strong><%= @order.content%></strong></div>
-    <div class="item">雇主电话:&nbsp;&nbsp;
-    <% if current_user == @order.user || current_user.id == @order.server %>
+    <div class="item">详细内容: <strong><%= @order.content%></strong></div>
+    <div class="item">雇主电话:
+    <% if current_user == @order.user || current_user.name == @order.server %>
       <strong><%= parse_phone(@order.phone)%></strong>
     <% else %>
       不可查看
     <% end %>
     </div>
-    <div class="item">截止时间:&nbsp;&nbsp;&nbsp;<strong><%= @order.deadline.strftime('%Y年%m月%d日 %H:%M:%S') %></strong></div>
-    <div class="item">创建时间:&nbsp;&nbsp;&nbsp;<strong><%= @order.created_at.strftime('%Y年%m月%d日 %H:%M:%S') %></strong></div>
-    <div class="item">接头地点:&nbsp;&nbsp;&nbsp;<strong><%= @order.location%></strong></div>
-    <div class="item">交易金额:&nbsp;&nbsp;&nbsp;<strong>￥<%= @order.total%></strong></div>
+    <div class="item">截止时间: <strong><%= @order.deadline.strftime('%Y年%m月%d日 %H:%M:%S') %></strong></div>
+    <div class="item">创建时间: <strong><%= @order.created_at.strftime('%Y年%m月%d日 %H:%M:%S') %></strong></div>
+    <div class="item">接头地点: <strong><%= @order.location%></strong></div>
+    <div class="item">交易金额: <strong>￥<%= @order.total%></strong></div>
 
+    <div class="item star">
+      <span class="glyphicon glyphicon-star-empty star-1" ></span>
+      <span class="glyphicon glyphicon-star-empty star-2" ></span>
+      <span class="glyphicon glyphicon-star-empty star-3" ></span>
+      <span class="glyphicon glyphicon-star-empty star-4" ></span>
+      <span class="glyphicon glyphicon-star-empty star-5" ></span>
+    </div>
   </div>
 </div>
 
-<% if current_user == @order.user || current_user.id == @order.server %>
+<% if current_user == @order.user || current_user.name == @order.server %>
   <% if @server %>
     <div class="order-detail panel panel-default">
       <div class="panel-heading">接单员信息</div>
       <div class="panel-body">
-        <div class="item"><%= @server.name %></div>
-        <div class="item"><%= @server.score %></div>
-        <div class="item"><%= @server.quantity %></div>
+        <div class="item">名字:<%= @server.name %></div>
+        <div class="item">评分:<%= @server.score %></div>
+        <div class="item">接单量:<%= @server.quantity %></div>
         <div class="item"></div>
       </div>
     </div>

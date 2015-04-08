@@ -79,11 +79,77 @@ time_picker_know = () ->
     $(document).one 'page:change', ->
       clearInterval time_picker_know_in
 
+star_hover_in = (selector) ->
+  $(selector).removeClass("glyphicon-star-empty").addClass("glyphicon-star").css("color", "green")
+star_hover_out = (selector) ->
+  $(selector).removeClass("glyphicon-star").addClass("glyphicon-star-empty").css("color", "black")
+
+star_success = (num) ->
+  $(".star").removeClass("star").addClass("star-set")
+  i = 1
+  s = ""
+  while i <= num
+    s = s + " " + ".star-" + i
+    i = i + 1
+  s = ".star-set" + s
+  star_hover_in(s)
+
+
+
+
+star_click = (num) ->
+  $.ajax
+      url: 'star'
+      type: 'POST'
+      data : 
+        order : window.location.href.split("/")[4]
+        star: num
+      success: (data, status, response) ->
+        star_success(num)
+      error: ->
+        alert("评分出错啦");
+      dataType: "json"
+
+
+star_picke = () ->
+  if $(".star").length
+    $(".star .star-1").hover(
+      -> star_hover_in(".star .star-1")
+      -> star_hover_out(".star .star-1")
+    ).click(
+      -> star_click(1)
+    )
+    $(".star .star-2").hover(
+      -> star_hover_in(".star .star-1, .star .star-2")
+      -> star_hover_out(".star .star-1, .star .star-2")
+    ).click(
+      -> star_click(2)
+    )
+    $(".star .star-3").hover(
+      -> star_hover_in(".star .star-1, .star .star-2, .star .star-3")
+      -> star_hover_out(".star .star-1, .star .star-2, .star .star-3")
+    ).click(
+      -> star_click(3)
+    )
+    $(".star .star-4").hover(
+      -> star_hover_in(".star .star-1, .star .star-2, .star .star-3, .star .star-4")
+      -> star_hover_out(".star .star-1, .star .star-2, .star .star-3, .star .star-4")
+    ).click(
+      -> star_click(4)
+    )
+    $(".star .star-5").hover(
+      -> star_hover_in(".star .star-1, .star .star-2, .star .star-3, .star .star-4, .star .star-5")
+      -> star_hover_out(".star .star-1, .star .star-2, .star .star-3, .star .star-4, .star .star-5")
+    ).click(
+      -> star_click(5)
+    )
+
 
 
 $(document).on 'page:change', ->
   time_down('.time-down')
   time_picker_func()
+  star_picke()
 
 
 
