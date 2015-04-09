@@ -16,13 +16,27 @@
     <div class="item">接头地点: <strong><%= @order.location%></strong></div>
     <div class="item">交易金额: <strong>￥<%= @order.total%></strong></div>
 
-    <div class="item star">
-      <span class="glyphicon glyphicon-star-empty star-1" ></span>
-      <span class="glyphicon glyphicon-star-empty star-2" ></span>
-      <span class="glyphicon glyphicon-star-empty star-3" ></span>
-      <span class="glyphicon glyphicon-star-empty star-4" ></span>
-      <span class="glyphicon glyphicon-star-empty star-5" ></span>
-    </div>
+    <% if @order.status == "pending" && @order.stars == nil %>
+      <div class="item star">请评分:
+        <span class="glyphicon glyphicon-star-empty 1" ></span>
+        <span class="glyphicon glyphicon-star-empty 2" ></span>
+        <span class="glyphicon glyphicon-star-empty 3" ></span>
+        <span class="glyphicon glyphicon-star-empty 4" ></span>
+        <span class="glyphicon glyphicon-star-empty 5" ></span>
+      </div>
+    <% elsif @order.stars != nil %>
+      <div class="item star-set">已评分:
+        <% for i in 1..5 %>
+          <% if @order.stars >= i %>
+            <span class="glyphicon glyphicon-star" ></span>
+          <% else %>
+            <span class="glyphicon glyphicon-star-empty" ></span>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <%# nothing %>
+    <% end %>
   </div>
 </div>
 

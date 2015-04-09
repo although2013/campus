@@ -41,9 +41,14 @@ class OrdersController < ApplicationController
 
   def do_star
     @order = Order.includes(:user).find(params[:order])
-    if @order.user == current_user
+
+    if @order.user == current_user && @order.status == 'pending'
       @order.update_attribute(:stars, params[:star])
+      server = User.find_by_name(@order.server)
+      server.update_attribute(:score, (server.score * server.quantity + 2 * (params[:star]).to_i)/(server.quantity))
       render :json => {}
+    else
+      render :json => {:error => '订单未完成或非本人订单,无法评分'}
     end
   end
 
