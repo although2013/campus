@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  resources :users
+  resources :users, param: :name
   resources :orders
   resources :sessions, only: [:new, :create, :destroy]
 

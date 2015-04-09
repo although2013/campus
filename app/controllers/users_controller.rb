@@ -70,7 +70,7 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find_by_name(params[:name])
     end
 
     def user_params
@@ -85,7 +85,7 @@ class UsersController < ApplicationController
     end
 
     def correct_user
-      @user = User.find(params[:id])
+      @user = User.find_by_name(params[:name])
       redirect_to(root_path) unless current_user?(@user)
     end
 end

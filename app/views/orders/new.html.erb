@@ -24,11 +24,10 @@
       <%= f.text_field :location, placeholder:"需要送达何处", class:"form-control" %>
 
       <%= f.label '电话' %>
-      <%= f.text_field :phone, placeholder:"电话号码", class:"form-control" %>
+      <%= f.text_field :phone, :value => current_user.phone, placeholder:"电话号码", class:"form-control" %>
 
       <%= f.label '总价' %>
       <%= f.text_field :total, placeholder:"您付给接单员的总金额", class:"form-control" %>
-
 
   <br />
 

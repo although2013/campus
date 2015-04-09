@@ -1,29 +1,47 @@
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Title</th>
-      <th>deadline</th>
-      <th>created_at</th>
-      <th>location</th>
-      <th>status</th>
-      <th>server</th>
-      <th>total</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @orders.each do |item| %>
-      <tr>
-        <td><%= item.id %></td>
-        <td><%= item.title %></td>
-        <td><%= item.deadline.strftime('%y年%m月%d日 %H:%M') %></td>
-        <td><%= item.created_at.strftime('%y年%m月%d日 %H:%M') %></td>
-        <td><%= item.location %></td>
-        <td><%= item.status %></td>
-        <td><%= item.server %></td>
-        <td><%= item.total %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="user-show">
+  <div class="my-profile">
+    名字：             <strong><%= @user.name %>             </strong><br>
+    邮箱：             <strong><%= @user.email %>            </strong><br>
+    余额：             <strong><%= @user.balance %>          </strong><br>
+    电话：             <strong><%= @user.phone %>            </strong><br>
+    接单评分：         <strong><%= @user.score %>            </strong><br>
+    接单数：           <strong><%= @user.quantity %>         </strong><br>
+    接单被投诉次数：   <strong><%= @user.wrong_count %>      </strong><br>
+    接单取消次数：     <strong><%= @user.terminated_count %> </strong><br>
+  </div>
+    
+  <% if @orders.length > 0 %>
+  <div class="my-orders">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>deadline</th>
+          <th>created_at</th>
+          <th>location</th>
+          <th>status</th>
+          <th>server</th>
+          <th>total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders.each do |item| %>
+          <tr>
+            <td><%= item.id %></td>
+            <td><%= item.title %></td>
+            <td><%= item.deadline.strftime('%y年%m月%d日 %H:%M') %></td>
+            <td><%= item.created_at.strftime('%y年%m月%d日 %H:%M') %></td>
+            <td><%= item.location %></td>
+            <td><%= item.status %></td>
+            <td><%= link_to item.server, user_path(item.server) %></td>
+            <td><%= item.total %></td>
+            <td><%= button_to 'finished' %></td>
+            <td><%= button_to 'wrong' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <% end %>
+</div>

@@ -102,7 +102,7 @@ star_click = (num) ->
       url: 'star'
       type: 'POST'
       data :
-        order : window.location.href.split("/")[4]
+        order: window.location.href.split("/")[4]
         star: num
       success: (data, status, response) ->
         if data.error

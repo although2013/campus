@@ -45,7 +45,7 @@ class OrdersController < ApplicationController
     if @order.user == current_user && @order.status == 'pending'
       @order.update_attribute(:stars, params[:star])
       server = User.find_by_name(@order.server)
-      server.update_attribute(:score, (server.score * server.quantity + 2 * (params[:star]).to_i)/(server.quantity))
+      server.update_attribute(:score, (server.score * (server.quantity-1) + 2 * (params[:star]).to_i)/(server.quantity))
       render :json => {}
     else
       render :json => {:error => '订单未完成或非本人订单,无法评分'}
@@ -100,6 +100,7 @@ class OrdersController < ApplicationController
     @order.status = "waiting"
     @order.process = order_process(@order, current_user)
     if @order.save
+      current_user.update_attribute(:phone, @order.phone)
       flash[:success] = "任务发布成功！"
       redirect_to @order
       WebsocketRails[:orders].trigger 'new_order', current_user.name

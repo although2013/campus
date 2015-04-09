@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20150408134204) do
     t.string   "remember_token",   limit: 255
     t.decimal  "balance",                      precision: 8, scale: 2, default: 0.0
     t.string   "phone",            limit: 255
-    t.integer  "score",            limit: 4,                           default: 10
+    t.integer  "score",            limit: 4,                           default: 0
     t.integer  "quantity",         limit: 4,                           default: 0
     t.integer  "wrong_count",      limit: 4,                           default: 0
     t.integer  "terminated_count", limit: 4,                           default: 0

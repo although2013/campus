@@ -48,7 +48,9 @@
         <div class="item">名字:<%= @server.name %></div>
         <div class="item">评分:<%= @server.score %></div>
         <div class="item">接单量:<%= @server.quantity %></div>
-        <div class="item"></div>
+        <div class="item">出错订单数:<%= @server.wrong_count %></div>
+        <div class="item">取消订单数:<%= @server.terminated_count %></div>
+
       </div>
     </div>
   <% end %>
