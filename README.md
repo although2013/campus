@@ -66,3 +66,12 @@ Get Order failed ->
                 
     Order
             process: pending:"2015/03/28 13:24:30 +8",finished:time
+
+
+TODO:
+    order#show 显示process  
+    user#show  
+    notification  
+
+    finished button  
+    wrong  button  
