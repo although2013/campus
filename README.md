@@ -75,3 +75,5 @@ Get Order failed ->
         notification
         finished button
         wrong  button
+        把orders controller里的方法移出来
+

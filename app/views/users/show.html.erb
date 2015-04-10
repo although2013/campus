@@ -34,10 +34,9 @@
             <td><%= item.created_at.strftime('%y年%m月%d日 %H:%M') %></td>
             <td><%= item.location %></td>
             <td><%= item.status %></td>
-            <td><%= link_to item.server, user_path(item.server) %></td>
+            <td><%= link_to item.server, user_path(item.server) unless item.server.blank? %></td>
             <td><%= item.total %></td>
-            <td><%= button_to 'finished' %></td>
-            <td><%= button_to 'wrong' %></td>
+            <td><%= link_to '查看', order_path(item) %></td>
           </tr>
         <% end %>
       </tbody>

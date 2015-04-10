@@ -16,7 +16,8 @@
     <div class="item">接头地点: <strong><%= @order.location%></strong></div>
     <div class="item">交易金额: <strong>￥<%= @order.total%></strong></div>
 
-    <% if @order.status == "pending" && @order.stars == nil %>
+    <% if @order.stars == nil && (["pending","finished","wrong"].include? @order.status) %>
+
       <div class="item star">请评分:
         <span class="glyphicon glyphicon-star-empty 1" ></span>
         <span class="glyphicon glyphicon-star-empty 2" ></span>
@@ -34,8 +35,29 @@
           <% end %>
         <% end %>
       </div>
+
     <% else %>
       <%# nothing %>
+    <% end %>
+    <% if @order.status == "pending" && !(["finished","wrong"].include? @order.status) %>
+      <div id="confirm-line">
+        <%= button_to "确认送达！", {
+                              :controller => "orders",
+                              :action => "finished_order",
+                              :user_id => current_user.id,
+                              :order => @order.id
+                            },
+                        remote: true,
+                        class:"btn btn-large btn-success finished-btn",
+                        autocomplete:"off" %>
+        <%= link_to "订单出错，投诉！", {
+                              :controller => "orders",
+                              :action => "wrong_order",
+                              :id => @order.id
+                            },
+                        class:"btn btn-large btn-danger",
+                        autocomplete:"off" %>
+      </div>
     <% end %>
   </div>
 </div>

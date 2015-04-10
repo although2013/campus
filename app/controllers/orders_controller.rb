@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :signed_in_user, only: [:new, :show, :edit, :update]
+  before_action :signed_in_user, only: [:new, :show, :edit, :update, :finished_order, :wrong_order, :do_star, :get_order, :pending_order, :cancel_order]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
 
@@ -24,6 +24,23 @@ class OrdersController < ApplicationController
   def edit
   end
 
+  def finished_order
+    @order = Order.find(params[:order])
+    if current_user.id == params[:user_id].to_i && @order.user == current_user && @order.status == "pending"
+      Rails.logger.info "=== correct ==="
+      @order.update_attributes(:status => "finished")
+      respond_to do |format|
+        format.js
+      end
+    else
+      render :json => {:error => 'something wrong...'}
+    end
+  end
+
+  def wrong_order
+    
+  end
+
   def pending_order
     @order = Order.find(params[:order])
     if @order.status == "serving"
@@ -42,7 +59,7 @@ class OrdersController < ApplicationController
   def do_star
     @order = Order.includes(:user).find(params[:order])
 
-    if @order.user == current_user && @order.status == 'pending'
+    if @order.user == current_user && (["pending","finished","wrong"].include? @order.status)
       @order.update_attribute(:stars, params[:star])
       server = User.find_by_name(@order.server)
       server.update_attribute(:score, (server.score * (server.quantity-1) + 2 * (params[:star]).to_i)/(server.quantity))
