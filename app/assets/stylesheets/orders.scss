@@ -13,18 +13,18 @@
 
 #order-panel {
   padding: 15px 8px 15px 8px;
-  margin-left: 15px;
-  margin-right: 15px;
-  margin-top: 25px;
+  margin: 25px 15px 5px 15px;
   background-color: white;
   max-width: 290px;
   border-radius: 3px;
 }
 
 .new-order {
+  border-radius: 4px;
+  background-color: white;
+  padding: 5px 10px 13px 10px;
   max-width: 365px;
-  margin-left: auto;
-  margin-right: auto;
+  margin:20px auto 0 auto;
 }
 
 .new-order > form > input {

@@ -14,9 +14,9 @@
       <%= f.label '截止时间' %>
 
       <div class='input-group date' id='datetimepicker'>
-        <%= f.text_field :deadline, placeholder:"", class:"form-control" %>
+        <%= f.text_field :deadline, placeholder:"右边的按钮选择截止时间→_→", class:"form-control" %>
         <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
+          <span class="glyphicon glyphicon-calendar" data-toggle="tooltip" data-placement="right" title="点击选择过期时间"></span>
         </span>
       </div>
 

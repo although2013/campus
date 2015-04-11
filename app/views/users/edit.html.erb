@@ -1,0 +1,6 @@
+<%= render 'users/form' %>
+
+<%= javascript_tag do %>
+  $("h3").text("修改账户信息")
+  $("#edit_user_1 > input.btn.btn-large.btn-primary").val("保存修改")
+<% end %>

@@ -41,7 +41,6 @@ class UsersController < ApplicationController
 
 
   def update
-
     if @user.update_attributes(user_params)
       if params[:user][:avatar].present?
         render :edit_avatar

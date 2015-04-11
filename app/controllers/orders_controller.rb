@@ -24,15 +24,22 @@ class OrdersController < ApplicationController
   def edit
   end
 
+  def search
+    render :search
+  end
+
   def finished_order
     @order = Order.find(params[:order])
     if current_user.id == params[:user_id].to_i && @order.user == current_user && @order.status == "pending"
       Rails.logger.info "=== correct ==="
-      @order.update_attributes(:status => "finished")
+      @order.status = "finished"
+      process = order_process(@order, current_user)
+      @order.update_attributes(:status => @order.status, :process => process)
       respond_to do |format|
         format.js
       end
     else
+      Rails.logger.info "=== wrong wrong ==="
       render :json => {:error => 'something wrong...'}
     end
   end
@@ -43,8 +50,10 @@ class OrdersController < ApplicationController
 
   def pending_order
     @order = Order.find(params[:order])
+    Rails.logger.info "#{@order.status}"
     if @order.status == "serving"
       @order.status = "pending"
+      Rails.logger.info "#{current_user.name == @order.server}"
       if current_user && current_user.name == @order.server
         process = order_process(@order, current_user)
         @order.update_attributes(:status => @order.status, :process => process)

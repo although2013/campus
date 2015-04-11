@@ -148,6 +148,28 @@ star_pick = () ->
     )
 
 
+do_search = () ->
+  if $('.search').length
+    $('.search').click(
+      -> search_ajax()
+    )
+
+search_ajax = () ->
+  val = $(".search-form input").val()
+  $.ajax
+      url: '/search'
+      type: 'POST'
+      data :
+        val: val
+      success: (data, status, response) ->
+        if data.error
+          alert(data.error);
+        else
+          alert(data.val)
+      error: ->
+        alert("搜索出错啦");
+      dataType: "json"
+
 
 $(document).on 'page:change', ->
   time_down('.time-down')
