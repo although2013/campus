@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
   end
 
   def finished_order
-    @order = Order.find(params[:order])
+    @order = Order.find(params[:id])
     if current_user.id == params[:user_id].to_i && @order.user == current_user && @order.status == "pending"
       @order.status = "finished"
       process = order_process(@order, current_user)
@@ -57,7 +57,7 @@ class OrdersController < ApplicationController
   end
 
   def pending_order
-    @order = Order.find(params[:order])
+    @order = Order.find(params[:id])
     Rails.logger.info "#{@order.status}"
     if @order.status == "serving"
       @order.status = "pending"
@@ -74,7 +74,7 @@ class OrdersController < ApplicationController
   end
 
   def do_star
-    @order = Order.includes(:user).find(params[:order])
+    @order = Order.includes(:user).find(params[:id])
 
     if @order.user == current_user && (["pending","finished","wrong"].include? @order.status)
       @order.update_attribute(:stars, params[:star])
@@ -87,7 +87,7 @@ class OrdersController < ApplicationController
   end
 
   def get_order
-    @order = Order.find(params[:order])
+    @order = Order.find(params[:id])
     @order.status = "serving"
     if current_user && current_user == User.find(params[:user_id])
       if @order.deadline < Time.now
@@ -112,7 +112,7 @@ class OrdersController < ApplicationController
   end
 
   def cancel_order
-    @order = Order.find(params[:order])
+    @order = Order.find(params[:id])
     @order.status = "terminated"
     process = order_process(@order, current_user)
     if current_user && current_user.name == @order.server

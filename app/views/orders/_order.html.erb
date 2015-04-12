@@ -19,7 +19,7 @@
                               :controller => "orders",
                               :action => "get_order",
                               :user_id => current_user.id,
-                              :order => order
+                              :id => order.id
                             },
                         remote: true,
                         class:"btn btn-large btn-primary get-order",
@@ -28,8 +28,6 @@
       <%= link_to '登录后可接单', new_session_path, class:"btn btn-primary get-order" %>
       <% end %>
     </div>
-
-
 
 </div>
 
