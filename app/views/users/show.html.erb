@@ -2,9 +2,9 @@
   <div class="my-profile">
   <ul class="list-group">
     <li class="list-group-item"><label>名字：</label><span><strong><%= @user.name %> </strong></span></li>
-    <li class="list-group-item"><label>邮箱：</label><span><strong><%= @user.email %></strong></span></li>
-    <li class="list-group-item"><label>余额：</label><span><strong><%= @user.balance %></strong></span></li>
-    <li class="list-group-item"><label>电话：</label><span><strong><%= @user.phone %></strong></span></li>
+    <li class="list-group-item"><label>邮箱：</label><span><strong><%= @user.email if current_user == @user %></strong></span></li>
+    <li class="list-group-item"><label>余额：</label><span><strong><%= @user.balance if current_user == @user %></strong></span></li>
+    <li class="list-group-item"><label>电话：</label><span><strong><%= @user.phone if current_user == @user %></strong></span></li>
     <li class="list-group-item"><label>接单评分：</label><span><strong><%= @user.score %></strong></span></li>
     <li class="list-group-item"><label>接单数：</label><span><strong><%= @user.quantity %></strong></span></li>
     <li class="list-group-item"><label>被投诉次数：</label><span><strong><%= @user.wrong_count %></strong></span></li>
@@ -12,7 +12,7 @@
   </ul>
   </div>
     
-  <% if @orders.length > 0 %>
+  <% if @orders.length > 0 && current_user == @user %>
   <div class="my-orders">
     <table class="table table-hover">
       <thead>

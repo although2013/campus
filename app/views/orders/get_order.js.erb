@@ -1,6 +1,6 @@
 if (!$('#order-panel').length) {
   $(".orders").removeClass("centered").addClass("col-sm-6")
-  $('.main .row').prepend('<div class="col-sm-1 "></div><div id="order-panel" class="col-sm-3"><div class="panel-head">你已接单：</div></div><div class="col-sm-1 "></div>');
+  $('.main .row').prepend('<div class="col-sm-1"></div><div id="order-panel" class="col-sm-3"><div class="panel-head">你已接单：</div></div><div class="col-sm-1 "></div>');
 };
 
 $('#order-panel').append("<%= j render 'orders/my_server', item:@order %>")

@@ -58,10 +58,8 @@ class OrdersController < ApplicationController
 
   def pending_order
     @order = Order.find(params[:id])
-    Rails.logger.info "#{@order.status}"
     if @order.status == "serving"
       @order.status = "pending"
-      Rails.logger.info "#{current_user.name == @order.server}"
       if current_user && current_user.name == @order.server
         process = order_process(@order, current_user)
         @order.update_attributes(:status => @order.status, :process => process)
@@ -75,7 +73,6 @@ class OrdersController < ApplicationController
 
   def do_star
     @order = Order.includes(:user).find(params[:id])
-
     if @order.user == current_user && (["pending","finished","wrong"].include? @order.status)
       @order.update_attribute(:stars, params[:star])
       server = User.find_by_name(@order.server)
