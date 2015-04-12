@@ -26,9 +26,9 @@
       </ul>
 
 
-      <%= form_tag search_path, :method => 'get', :class => "navbar-form navbar-left search-form" do %>
+      <%= form_tag search_path, :method => 'post', :class => "navbar-form navbar-left search-form" do %>
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="搜索目的地或任务标题">
+          <%= text_field_tag :search, params[:search], :id => 'search_field', class:"form-control q_str", placeholder:"搜索目的地或任务标题" %>
         </div>
         <%= submit_tag "Search", :name => nil, :class => "btn btn-default search" %>
       <% end %>

@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   match '/orders/star', to: 'orders#do_star', via: 'post', as: :do_star
   match '/orders/wrong/:id', to: 'orders#wrong_order', via: 'get', as: :wrong_order
   match '/orders/finished', to: 'orders#finished_order', via: 'post', as: :finished_order
-  match '/search', to: 'orders#search', via: 'get', as: :search
+  match '/search', to: 'orders#search', via: 'post', as: :search
 end

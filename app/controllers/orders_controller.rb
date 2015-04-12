@@ -25,13 +25,22 @@ class OrdersController < ApplicationController
   end
 
   def search
-    render :search
+    if params[:search]
+      @orders = Order.where(["(deadline > ? AND server IS NULL) AND \
+(title LIKE ? OR content LIKE ? OR location LIKE ?)",
+                                Time.now,
+                                "%#{params[:search]}%",
+                                "%#{params[:search]}%",
+                                "%#{params[:search]}%"])
+      render :index
+    else
+      redirect_to orders_path
+    end
   end
 
   def finished_order
     @order = Order.find(params[:order])
     if current_user.id == params[:user_id].to_i && @order.user == current_user && @order.status == "pending"
-      Rails.logger.info "=== correct ==="
       @order.status = "finished"
       process = order_process(@order, current_user)
       @order.update_attributes(:status => @order.status, :process => process)
@@ -39,7 +48,6 @@ class OrdersController < ApplicationController
         format.js
       end
     else
-      Rails.logger.info "=== wrong wrong ==="
       render :json => {:error => 'something wrong...'}
     end
   end
