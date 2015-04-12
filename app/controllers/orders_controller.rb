@@ -178,13 +178,4 @@ class OrdersController < ApplicationController
     def order_params
       params.require(:order).permit(:title, :content, :deadline, :location, :phone, :total)
     end
-
-    def order_process(order, user)
-      status_moment = Time.now
-      if order.process.blank?
-        "#{order.status}:#{status_moment},##{user.id}:#{user.name}\n"
-      else
-        "#{order.process}#{order.status}:#{status_moment},##{user.id}:#{user.name}\n"
-      end
-    end
 end

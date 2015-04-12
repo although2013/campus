@@ -35,7 +35,6 @@
           <% end %>
         <% end %>
       </div>
-
     <% else %>
       <%# nothing %>
     <% end %>
@@ -58,6 +57,9 @@
                         class:"btn btn-large btn-danger",
                         autocomplete:"off" %>
       </div>
+    <% end %>
+    <% if @order.process %>
+      <div class="order-process"><%= format_process(@order.process).html_safe %></div>
     <% end %>
   </div>
 </div>
