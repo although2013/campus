@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :signed_in_user, only: [:new, :show, :edit, :update, :finished_order, :wrong_order, :do_star, :get_order, :pending_order, :cancel_order]
+  before_action :authenticate_user!, :except => [:index]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
 

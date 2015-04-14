@@ -1,0 +1,25 @@
+<div class="center pad">
+
+  <div class="signup-form">
+    <h3>注册账户</h3>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
+
+      <%= f.label "用户名" %>
+      <%= f.text_field :name, class:'form-control', placeholder:'随便写' %><br>
+
+      <%= f.label "邮箱地址" %>
+      <%= f.text_field :email, class:'form-control', placeholder:'写个能记得住的，登录用的' %><br>
+
+      <%= f.label :password, "输入密码" %>
+      <%= f.password_field :password, class:'form-control', placeholder:'密码嘛，你懂的', autocomplete: "off" %><br>
+
+      <%= f.label :password, "再次输入密码" %>
+      <%= f.password_field :password_confirmation, class:'form-control', placeholder:'再打一遍...' %><br>
+
+      <%= f.submit "注册用户", class: "btn btn-large btn-primary"%><br>
+    <% end %>
+  </div>
+
+</div>
+

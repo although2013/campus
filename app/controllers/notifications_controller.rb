@@ -1,5 +1,6 @@
 class NotificationsController < ApplicationController
-  before_action :signed_in_user
+  before_action :authenticate_user!
+
   after_action :mark_all_as_read, only: [:index]
 
   def index

@@ -1,7 +1,9 @@
-<% [:success, :info, :warning, :danger, :alert, :notice].each do |type| %>
+<% ['success', 'info', 'warning', 'danger', 'alert', 'notice'].each do |type| %>
   <% if flash[type] %>
     <% if type == 'notice' %>
       <div class="alert alert-info alert-dismissible">
+    <% elsif type == 'alert' %>
+      <div class="alert alert-danger alert-dismissible">
     <% else %>
       <div class="alert alert-<%=type%> alert-dismissible">
     <% end %>

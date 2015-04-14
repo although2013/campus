@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'bootstrap-sass'
-gem 'bcrypt'
+gem 'devise'
 
 gem 'mysql2'
 
@@ -10,6 +10,9 @@ gem 'websocket-rails'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
 
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'

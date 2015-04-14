@@ -1,4 +1,3 @@
-#= require_self
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -6,10 +5,9 @@
 
 @import 'notifications';
 @import 'orders';
-@import 'sessions';
-@import 'users';
+@import 'users_old';
 @import 'welcome';
-
+@import 'sessions';
 
 $hover-color:white;
 $main-color:#176BBF;
