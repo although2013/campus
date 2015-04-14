@@ -1,0 +1,49 @@
+zh-CN:
+  devise:
+    failure:
+      already_authenticated: "你已经登录了~"
+      inactive: "Your account is not activated yet."
+      invalid: "Invalid %{authentication_keys} or password."
+      locked: "Your account is locked."
+      last_attempt: "你再试错一次，账户就会被锁定哦。"
+      not_found_in_database: "错误的 %{authentication_keys} 或密码."
+      timeout: "请登录"
+      unauthenticated: "你需要登录或者注册才能继续。"
+      unconfirmed: "You have to confirm your email address before continuing."
+    omniauth_callbacks:
+      failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
+      success: "Successfully authenticated from %{kind} account."
+    passwords:
+      no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
+      send_instructions: "You will receive an email with instructions on how to reset your password in a few minutes."
+      send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
+      updated: "你的密码更新成功，并已自动登录"
+      updated_not_active: "Your password has been changed successfully."
+    registrations:
+      destroyed: "再见，你已经删除了你的账户，期望能再次见到你。"
+      signed_up: "欢迎，你成功注册了账号！"
+      signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
+      signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."
+      signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
+      update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirm link to confirm your new email address."
+      updated: "账户信息已经成功更新！"
+    sessions:
+      signed_in: "登录成功！"
+      signed_out: "退出登录成功！"
+      already_signed_out: "退出登录成功！"
+    activerecord:
+      email: '邮箱地址'
+      name: '用户名'
+      password: '密码'
+      password_confirmation: '密码确认'
+  errors:
+    messages:
+      already_confirmed: "was already confirmed, please try signing in"
+      confirmation_period_expired: "needs to be confirmed within %{period}, please request a new one"
+      expired: "has expired, please request a new one"
+      not_found: "没有找到"
+      not_locked: "was not locked"
+      not_saved:
+        one: "保存时发生了1个错误:"
+        other: "出现了%{count}个错误："
+      blank: "不能为空"

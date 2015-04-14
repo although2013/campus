@@ -70,10 +70,11 @@ Get Order failed ->
 ---
 
     TODO:
-        order#show 显示process
-        user#show
+        ~~order#show 显示process~~
+        ~~user#show~~
         notification
-        finished button
+        ~~finished button~~
         wrong  button
         把orders controller里的方法移出来
+        User验证， 
 
