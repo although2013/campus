@@ -5,7 +5,7 @@
 
     <div class="item">详细内容: <strong><%= @order.content%></strong></div>
     <div class="item">雇主电话:
-    <% if current_user == @order.user || current_user.name == @order.server %>
+    <% if current_user and current_user == @order.user || current_user.name == @order.server %>
       <strong><%= parse_phone(@order.phone)%></strong>
     <% else %>
       不可查看
@@ -64,7 +64,7 @@
   </div>
 </div>
 
-<% if current_user == @order.user || current_user.name == @order.server %>
+<% if current_user and current_user == @order.user || current_user.name == @order.server %>
   <% if @server %>
     <div class="order-detail panel panel-default">
       <div class="panel-heading">接单员信息</div>
