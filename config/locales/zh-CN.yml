@@ -1,18 +1,4 @@
 zh-CN:
-  layouts:
-    header:
-      sort: "分类"
-      i_sell: "我要卖"
-      lastest: "最新"
-      login: "登录"
-      signup: "注册"
-      menu: "菜单"
-      find_stuff: "查找商品"
-      search: "搜索"
-      profile: "我的空间"
-      edit_profile: "编辑资料"
-      logout: "退出登录"
-      my_products: "我的商品"
   activerecord:
     attributes:
       user:
@@ -21,24 +7,17 @@ zh-CN:
         created_at: "创建于"
         email: Email
         locale: "语言"
-        name: "全名"
+        name: "用户名"
         password: "密码"
         password_confirmation: "密码确认"
         current_password: "旧的密码"
-        username: "用户名"
         remember_me: "记住登录状态"
-      product:
-        name: "商品名"
-        inventory: "库存量"
-        price: "价格"
-        body: "商品详情"
-        category: "类别"
     errors:
       models:
         user:
           attributes:
             email:
               taken: "已被别人使用"
-              invalid: "邮箱格式错误"
+              invalid: "格式错误"
             password_confirmation:
               confirmation: "两次输入的密码不匹配！"
