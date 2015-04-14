@@ -1,3 +1,4 @@
+<div class="edit-user-form">
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -5,7 +6,7 @@
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email, autofocus: true, class:'form-control' %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -13,27 +14,39 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.label :password %> <i>(如果你不想修改密码，请不要填写)</i><br />
+    <%= f.password_field :password, autocomplete: "off", class:'form-control' %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.label :password_confirmation %> <i>(如果你不想修改密码，请不要填写)</i><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off", class:'form-control' %>
   </div>
 
   <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
+    <%= f.label :current_password %> <i>(填写你当前的密码来保存修改)</i><br />
+    <%= f.password_field :current_password, autocomplete: "off", class:'form-control' %>
   </div>
 
+<br>
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit "保存", class: "btn btn-large btn-primary" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<br>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<h3>删除账户</h3>
 
-<%= link_to "Back", :back %>
+<div class="delete-user">
+  <p>不喜欢这个网站？<p>
+  <%= button_to "删除我的账户", registration_path(resource_name),
+                                data: { confirm: "确定要删除你的账户吗？" },
+                                method: :delete,
+                                class: "btn btn-large btn-danger" %>
+</div>
+
+<br><br>
+<%= link_to "返回", :back %>
+
+</div>
