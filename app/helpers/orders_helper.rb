@@ -23,10 +23,26 @@ module OrdersHelper
   end
 
   def format_process(process)
-    数组 = process.scan(/(\w+):(\d+\-\d+\-\d+\s\d+:\d+:\d+\s\+\d{4}),#(\d):(.*)\n/)
-    超级文本 = ""
-    数组.each do |line|
-      超级文本.prepend "<tr><td>#{line[0]}</td><td>#{line[1][0,19]}</td><td>#{line[3]}</td></tr>"
+    arr = process.scan(/(\w+):(\d+\-\d+\-\d+\s\d+:\d+:\d+\s\+\d{4}),#(\d):(.*)\n/)
+    html_str = ""
+
+    arr.each do |line|
+      formated_status = case "#{line[0]}"
+      when 'waiting'
+        '等待'
+      when 'terminated'
+        '被取消'
+      when 'serving'
+        '被接单'
+      when 'pending'
+        '等待您确认'
+      when 'finished'
+        '完成'
+      when 'wrong'
+        '出错'
+      end
+
+      html_str.prepend "<tr><td>#{formated_status}</td><td>#{line[1][0,19]}</td><td>#{line[3]}</td></tr>"
     end
 
     """<table class='table'>
@@ -38,7 +54,7 @@ module OrdersHelper
         </tr>
       </thead>
       <tbody>
-        #{超级文本}
+        #{html_str}
       </tbody>
     </table>"""
   end

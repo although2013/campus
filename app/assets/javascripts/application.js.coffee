@@ -84,6 +84,7 @@ star_hover_in = (selector) ->
 star_hover_out = (selector) ->
   $(selector).removeClass("glyphicon-star").addClass("glyphicon-star-empty").css("color", "black")
 
+
 star_success = (num) ->
   $(".star").removeClass("star").addClass("star-set")
   i = 1
@@ -96,13 +97,13 @@ star_success = (num) ->
 
 
 
-
 star_click = (num) ->
+  order_id = window.location.href.split("/")[4]
   $.ajax
-      url: 'star'
+      url: "/orders/#{order_id}/star"
       type: 'POST'
       data :
-        order: window.location.href.split("/")[4]
+        id: order_id
         star: num
       success: (data, status, response) ->
         if data.error

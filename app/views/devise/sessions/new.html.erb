@@ -1,6 +1,6 @@
 <div class="login-form">
   <h3>登录</h3>
-  <%= form_for(resource, as: resource_name, url: user_session_path(resource_name)) do |f| %>
+  <%= form_for(resource, as: resource_name, url: user_session_path) do |f| %>
     <div class="row item">
       <%= f.label :email, "帐号", class:"col-md-3 control-label" %>
       <div class="col-md-9">
