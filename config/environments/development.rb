@@ -41,4 +41,8 @@ Rails.application.configure do
   config.middleware.delete Rack::Lock
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+
+  config.app_domain = 'although2013.com'
+
 end

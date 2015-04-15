@@ -226,7 +226,6 @@ DEPENDENCIES
   jquery-rails
   momentjs-rails (>= 2.9.0)
   mysql2
-  omniauth
   omniauth-google-oauth2
   omniauth-twitter
   rails (= 4.2.0)

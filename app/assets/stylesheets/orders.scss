@@ -6,6 +6,15 @@
   margin: 0 auto;
 }
 
+p #or{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#index-twitter img {
+  width: 200px;
+}
+
 .orders {
   margin-top:25px;
   max-width: 730px;
@@ -31,16 +40,20 @@
   max-width:350px;
 }
 
+.new-order .line {
+  padding-bottom: 10px;
+}
+
 .new-order > form > textarea {
   max-width:350px;
 }
 
-.new-order h2 {
+.new-order h3 {
   text-align: center;
 }
 
 .new-order > form > .btn {
-  width: 80px;
+  width: 345px;
 }
 
 .order-card {

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :users
+
   root 'welcome#index'
 
   resources :users, param: :name
@@ -19,5 +20,8 @@ Rails.application.routes.draw do
       match '/search', to: 'orders#search', via: 'post', as: :search
     end
   end
+
+
+  match "/auth/:provider/callback", to: "authentications#create", via: 'get'
 
 end

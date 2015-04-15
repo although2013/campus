@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   has_many :orders, dependent: :destroy
   has_many :notifications, dependent: :destroy
-
+  has_many :authentications, dependent: :destroy
 
   
   def to_param

@@ -1,37 +1,47 @@
 <div class="new-order">
-<h2>发布商品</h2>
+<h3>发布商品</h3>
 <br />
 <div id="show-time-diff"></div>
 
 <%= form_for(@order) do |f| %>
-
-      <%= f.label '标题' %>
-      <%= f.text_field :title, autofocus: true, placeholder:"任务的标题", class:"form-control" %>
-
-      <%= f.label '详细' %>
-      <%= f.text_area :content, placeholder:"具体描述任务", class:"form-control" %>
-
-      <%= f.label '截止时间' %>
-
-      <div class='input-group date' id='datetimepicker'>
-        <%= f.text_field :deadline, placeholder:"右边的按钮选择截止时间→_→", class:"form-control" %>
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar" data-toggle="tooltip" data-placement="right" title="点击选择过期时间"></span>
-        </span>
+      <div class="line">
+        <%= f.label '标题' %>
+        <%= f.text_field :title, autofocus: true, placeholder:"任务的标题", class:"form-control" %>
       </div>
 
-      <%= f.label '位置' %>
-      <%= f.text_field :location, placeholder:"需要送达何处", class:"form-control" %>
+      <div class="line">
+        <%= f.label '详细' %>
+        <%= f.text_area :content, placeholder:"具体描述任务", class:"form-control" %>
+      </div>
 
-      <%= f.label '电话' %>
-      <%= f.text_field :phone, :value => current_user.phone, placeholder:"电话号码", class:"form-control" %>
+      <div class="line">
+        <%= f.label '截止时间' %>
+        <div class='input-group date' id='datetimepicker'>
+          <%= f.text_field :deadline, placeholder:"右边的按钮选择截止时间→_→", class:"form-control" %>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar" data-toggle="tooltip" data-placement="right" title="点击选择过期时间"></span>
+          </span>
+        </div>
+      </div>
 
-      <%= f.label '总价' %>
-      <%= f.text_field :total, placeholder:"您付给接单员的总金额", class:"form-control" %>
+      <div class="line">
+        <%= f.label '位置' %>
+        <%= f.text_field :location, placeholder:"需要送达何处", class:"form-control" %>
+      </div>
 
-  <br />
+      <div class="line">
+        <%= f.label '电话' %>
+        <%= f.text_field :phone, :value => current_user.phone, placeholder:"电话号码", class:"form-control" %>
+      </div>
 
-  <%= f.submit "发 布", class: "btn btn-large btn-primary" %>
+      <div class="line">
+        <%= f.label '总价' %>
+        <%= f.text_field :total, placeholder:"您付给接单员的总金额", class:"form-control" %>
+      </div>
+
+      <br>
+
+      <%= f.submit "发 布", class: "btn btn-large btn-primary" %>
 
 <% end %>
 

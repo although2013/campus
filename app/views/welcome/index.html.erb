@@ -7,8 +7,17 @@
   <p>你也可以在顺路的时候抢单他人的任务，完成便有赏金奖励哦！</p>
   <br/>
 
-  <p><%= link_to '现在注册', new_user_registration_path, class:"btn btn-primary btn-lg", role:"button" %></p>
+  <p>
+    <%= link_to '现在注册', new_user_registration_path, class:"btn btn-primary btn-lg", role:"button" %>
+    <span id="or">或者</span>
+    <a href="auth/twitter" id="index-twitter">
+      <img src="<%= image_path("twitterlogin.png") %>" >
+    </a>
+  </p>
+
+
   <br/>
+
 
   <p>已有帐号？<%= link_to '登录', new_user_session_path %>
 </div>
