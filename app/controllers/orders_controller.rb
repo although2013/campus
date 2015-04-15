@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
 
 
   def index
-    @orders = Order.includes(:user).where(['deadline > ? AND server IS NULL', Time.now])
+    @orders = Order.includes(:user).where(['deadline > ? AND (server IS NULL OR server = ?)', Time.now, ''])
     if current_user
       @my_servers = Order.where(['server = ? AND status = "serving"', current_user.name]).limit(5)
     end
@@ -63,6 +63,7 @@ class OrdersController < ApplicationController
       if current_user && current_user.name == @order.server
         process = order_process(@order, current_user)
         @order.update_attributes(:status => @order.status, :process => process)
+        current_user.update_attributes(:quantity => (current_user.quantity + 1), :current_orders => (current_user.current_orders - 1))
         Notification.create(user_id: @order.user_id, order_id: @order.id, content: "你的订单##{@order.id},被接单员确认已完成!")
         respond_to do |format|
           format.js
@@ -91,10 +92,14 @@ class OrdersController < ApplicationController
         respond_to do |format|
           format.json { render :json => { :error => '该订单已过期，无法接单' } }
         end
-      elsif @order.server == nil
+      elsif current_user.current_orders > 5
+        respond_to do |format|
+          format.json { render :json => { :error => '每人同时只能获取5个订单' } }
+        end
+      elsif @order.server.blank?
         process = order_process(@order, current_user)
         @order.update_attributes(:server => current_user.name, :status => @order.status, :process => process)
-        current_user.update_attribute(:quantity, (current_user.quantity + 1))
+        current_user.update_attributes(:current_orders => (current_user.current_orders + 1))
         Notification.create(user_id: @order.user_id, order_id: @order.id, content: "你的订单##{@order.id},被接单啦!")
         WebsocketRails[:orders].trigger 'order_gotten', @order.id
         respond_to do |format|
@@ -114,7 +119,7 @@ class OrdersController < ApplicationController
     process = order_process(@order, current_user)
     if current_user && current_user.name == @order.server
       @order.update_attributes(:server => nil, :status => @order.status, :process => process)
-      current_user.update_attribute(:terminated_count, (current_user.terminated_count + 1))
+      current_user.update_attributes(:terminated_count => (current_user.terminated_count + 1), :current_orders => (current_user.current_orders - 1))
       respond_to do |format|
         format.js {render inline: "location.reload();" }
       end

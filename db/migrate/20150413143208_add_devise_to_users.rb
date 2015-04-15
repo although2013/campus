@@ -6,13 +6,6 @@ class AddDeviseToUsers < ActiveRecord::Migration
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
-      t.decimal :balance, default: 0.00, precision: 8, scale: 2
-      t.string  :phone
-
-      t.integer :score, default: 0
-      t.integer :quantity, default: 0
-      t.integer :wrong_count, default: 0
-      t.integer :terminated_count, default: 0
 
       ## Recoverable
       t.string   :reset_password_token

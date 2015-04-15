@@ -29,7 +29,7 @@
         </tr>
       </thead>
 
-      <% if @orders.length > 0 && current_user == @user -%>
+      <% if @orders && @orders.length > 0 && current_user == @user -%>
       <tbody>
         <% @orders.each do |item| -%>
           <tr>

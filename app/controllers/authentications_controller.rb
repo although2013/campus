@@ -18,7 +18,8 @@ class AuthenticationsController < ApplicationController
       user = User.new
       user.authentications.build(provider:omniauth['provider'], uid:omniauth['uid'])
       if User.find_by_name(omniauth['info']['name'])
-        user.name = Time.now.to_f.to_s[5,10]
+        s = Time.now.to_f.to_s
+        user.name = s[5,5] + s[11,4]
       else
         user.name = omniauth['info']['name']
       end

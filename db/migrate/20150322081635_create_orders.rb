@@ -9,7 +9,7 @@ class CreateOrders < ActiveRecord::Migration
       t.string     :location
       t.string     :phone
       t.string     :status
-      t.string     :server
+      t.string     :server, default: nil, :null => true
       t.decimal    :total, precision: 8, scale: 2
 
       t.text       :process

@@ -6,7 +6,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_name(params[:name])
-    @orders = @user.orders.all
+    if @user
+      @orders = @user.orders.all
+    end
   end
 
 end
