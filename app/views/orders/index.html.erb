@@ -12,10 +12,16 @@
       <% if @my_servers && @my_servers.length > 0 %>
         <div class="col-sm-6 orders">
           <%= render @orders %>
+          <div id="index-paginate">
+            <%= will_paginate @orders %>
+          </div>
         </div>
       <% else %>
         <div class="centered orders">
           <%= render @orders %>
+          <div id="index-paginate">
+            <%= will_paginate @orders %>
+          </div>
         </div>
       <% end %>
 

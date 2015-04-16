@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
 
 
   def index
-    @orders = Order.includes(:user).where(['deadline > ? AND (server IS NULL OR server = ?)', Time.now, ''])
+    @orders = Order.includes(:user).where(['deadline > ? AND (server IS NULL OR server = ?)', Time.now, '']).paginate(page: params[:page]).per_page(10)
     if current_user
       @my_servers = Order.where(['server = ? AND status = "serving"', current_user.name]).limit(5)
     end
@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
                                 Time.now,
                                 "%#{params[:search]}%",
                                 "%#{params[:search]}%",
-                                "%#{params[:search]}%"])
+                                "%#{params[:search]}%"]).paginate(page: params[:page]).per_page(15)
       render :index
     else
       redirect_to orders_path

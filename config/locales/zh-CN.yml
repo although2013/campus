@@ -20,3 +20,6 @@ zh-CN:
               taken: "已被别人使用"
             password_confirmation:
               confirmation: "两次输入的密码不匹配！"
+  will_paginate:
+    previous_label: "<<"
+    next_label: ">>"
