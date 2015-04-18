@@ -23,8 +23,10 @@ module OrdersHelper
   end
 
   def format_process(process)
-    arr = process.scan(/(\w+):(\d+-\d+-\d+\s\d+:\d+:\d+)\s-\d+,#(\d+):(\w+)/)
+    Rails.logger.info "-------------#{process.inspect}------------"
+    arr = process.scan(/(\w+):(\d+-\d+-\d+\s\d+:\d+:\d+)\s.\d+,#(\d+):(\w+)/)
     html_str = ""
+    Rails.logger.info "-------------#{arr.inspect}------------"
 
     arr.each do |line|
       formated_status = case "#{line[0]}"
@@ -41,11 +43,12 @@ module OrdersHelper
       when 'wrong'
         '出错'
       end
-
-      Rails.logger.info "-----------formated_status:#{formated_status}----"
+      Rails.logger.info "-------------#{formated_status}------------"
 
       html_str.prepend "<tr><td>#{formated_status}</td><td>#{line[1][0,19]}</td><td>#{line[3]}</td></tr>"
     end
+
+    Rails.logger.info "-------------#{html_str}------------"
 
     """<table class='table'>
       <thead>
