@@ -24,7 +24,7 @@ module OrdersHelper
 
   def format_process(process)
     Rails.logger.info "-------------#{process.inspect}------------"
-    arr = process.scan(/(\w+):(\d+-\d+-\d+\s\d+:\d+:\d+)\s.\d+,#(\d+):(\w+)/)
+    arr = process.scan(/(\w+):(\d+-\d+-\d+\s\d+:\d+:\d+\s.\d+),#(\d+):(\w+)/)
     html_str = ""
     Rails.logger.info "-------------#{arr.inspect}------------"
 
@@ -44,8 +44,8 @@ module OrdersHelper
         '出错'
       end
       Rails.logger.info "-------------#{formated_status}------------"
-
-      html_str.prepend "<tr><td>#{formated_status}</td><td>#{line[1][0,19]}</td><td>#{line[3]}</td></tr>"
+      datetime = DateTime.parse(line[1]).new_offset(8.0/24).strftime('%Y-%m-%d %H:%M:%S')
+      html_str.prepend "<tr><td>#{formated_status}</td><td>#{datetime}</td><td>#{line[3]}</td></tr>"
     end
 
     Rails.logger.info "-------------#{html_str}------------"
