@@ -23,7 +23,7 @@ module OrdersHelper
   end
 
   def format_process(process)
-    arr = process.scan(/(\w+):(\d+\-\d+\-\d+\s\d+:\d+:\d+\s\+\d{4}),#(\d):(.*)\n/)
+    arr = process.scan(/(\w+):(\d+-\d+-\d+\s\d+:\d+:\d+)\s-\d+,#(\d+):(.{3,20})\\n/)
     html_str = ""
 
     arr.each do |line|
@@ -41,6 +41,8 @@ module OrdersHelper
       when 'wrong'
         '出错'
       end
+
+      Rails.logger.info "-----------formated_status:#{formated_status}----"
 
       html_str.prepend "<tr><td>#{formated_status}</td><td>#{line[1][0,19]}</td><td>#{line[3]}</td></tr>"
     end
