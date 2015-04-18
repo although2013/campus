@@ -23,7 +23,7 @@ module OrdersHelper
   end
 
   def format_process(process)
-    arr = process.scan(/(\w+):(\d+-\d+-\d+\s\d+:\d+:\d+)\s-\d+,#(\d+):(.{3,20})\\n/)
+    arr = process.scan(/(\w+):(\d+-\d+-\d+\s\d+:\d+:\d+)\s-\d+,#(\d+):(\w+)/)
     html_str = ""
 
     arr.each do |line|
