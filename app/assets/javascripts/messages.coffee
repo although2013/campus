@@ -1,4 +1,4 @@
-host_with_port = "#{window.location.hostname}:#{window.location.port}"
+host_with_port = "#{window.location.hostname}:3001"
 dispatcher = new WebSocketRails("#{host_with_port}/websocket");
 
 channel = dispatcher.subscribe('orders');

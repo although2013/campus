@@ -6,6 +6,7 @@ gem 'bootstrap-will_paginate'
 gem 'bootstrap-sass'
 gem 'devise'
 
+gem 'redis'
 gem 'mysql2'
 gem 'websocket-rails'
 
