@@ -52,6 +52,8 @@ sudo vi /etc/init.d/redis_6379
 
 sudo cp redis.conf /etc/redis/6379.conf
 sudo mkdir /var/redis/6379
+
+sudo vi /etc/redis/6379.conf
 #Set daemonize to yes (by default it is set to no).
 #Set the pidfile to /var/run/redis_6379.pid (modify the port if needed).
 #Change the port accordingly. In our example it is not needed as the default port is already 6379.
@@ -60,7 +62,7 @@ sudo mkdir /var/redis/6379
 #Set the dir to /var/redis/6379 (very important step!)
 
 sudo update-rc.d redis_6379 defaults
-/etc/init.d/redis_6379 start
+sudo /etc/init.d/redis_6379 start
 redis-cli ping
 
 #END------------redis----------
@@ -95,25 +97,25 @@ sudo apt-get -y install nginx-extras passenger;
 
 
 
-sudo sh -c 'sed -e "s/# passenger_root/passenger_root/" -e "s/# passenger_ruby.*/passenger_ruby \/home\/deployme\/.rvm\/wrappers\/default\/ruby;/" /etc/nginx/nginx.conf > /etc/nginx/nginx.conf2'
+sudo sh -c 'sed -e "s/# passenger_root/passenger_root/" -e "s/# passenger_ruby.*/passenger_ruby \/home\/deployme\/.rvm\/wrappers\/default\/ruby;/" /etc/nginx/nginx.conf > /etc/nginx/nginx.conf2';
 
-sudo mv /etc/nginx/nginx.conf  /etc/nginx/nginx.conf_back
-sudo mv /etc/nginx/nginx.conf2 /etc/nginx/nginx.conf
-
-
+sudo mv /etc/nginx/nginx.conf  /etc/nginx/nginx.conf_back;
+sudo mv /etc/nginx/nginx.conf2 /etc/nginx/nginx.conf;
 
 
-sudo mkdir -p /var/www/campusorders.com
-sudo chown deployme:deployme /var/www/campusorders.com
-
-cd /var/www/campusorders.com
 
 
-git clone https://github.com/although2013/campusOrders.git master
+sudo mkdir -p /var/www/campusorders.com;
+sudo chown deployme:deployme /var/www/campusorders.com;
 
-cd master
+cd /var/www/campusorders.com;
 
-sudo apt-get -y install mysql-server libmysqlclient-dev
+
+git clone https://github.com/although2013/campusOrders.git master;
+
+cd master;
+
+sudo apt-get -y install mysql-server libmysqlclient-dev;
 
 
 

@@ -37,7 +37,7 @@ module OrdersHelper
       when 'serving'
         '被接单'
       when 'pending'
-        '等待您确认'
+        '等待确认'
       when 'finished'
         '完成'
       when 'wrong'
