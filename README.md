@@ -1,23 +1,35 @@
-用户登陆发布任务，主要是顺路帮带东西什么的  
-商户实时抢单，商户提前支付订金与账户内  
+# WHAT IS IT
+基于一个线下社区的，用户发起简单的订单任务，有能力或时间的人帮助完成，并获取用户佣金
 
-主要模块就是 任务，User，余额（后面要有支付宝在线支付），商户的评分，短信验证，  
-
-主页做展示，说明网站何用，注册，登陆链接  
-
-浏览：实时展示任务单，实时，抢单后右侧显示计时，同时拥有最多X个任务  
+后期应支持线上支付。
 
 
-~~能搞得定再考虑Android客户端吧~~  
+# IDEA
+不论是`外卖`或者各种`帮取物品`业务在大学校园不断发展,
+
+懒人用户有非常多的理由通过他人的`顺路`或者`专业`来节省时间。
 
 
 
-ADD
+#LOGIC
+用户注册或第三方登录后可以发布订单，            `status->waiting`
 
-Get Order failed ->  
-把informatoin 放右边，固定于窗口什么的，  
+订单以手机号为联系方式
 
-![Demo Picture](http://although2013.com/uploads/pictures/detail_2015-03-30_19_08_26____.png)
+在未过期（用户设定过期时间）前，他人可以接单，   `status->serving`
+
+接单员电话联系用户，讲清任务逻辑，
+
+接单员开始实施，
+
+或取消订单。                                  `status->terminated`
+
+实施完成，接单员确认完成。                     `status->pending`
+
+用户确认完成，评分。                          `status->finished`
+
+用户受到欺骗，提交纠纷处理单。                 `status->wrong`
+
 
 
 ----
@@ -28,53 +40,23 @@ Get Order failed ->
                  |         |             |  
                  |         |       ---<------>----  
                  <--<-------       |             |  
-               server=>NULL     finished       wrong  
+                server=>NULL    finished       wrong  
 
 
-前期线下应该在接单后 打电话确认  
-后期可以在线预支付，冻结资金，接单员冻结部分金额保证质量  
 
-
-用户发单，       `Order.status->waiting`  
-接单，           `Order.status->serving`,  `quantity + 1`  
-终止terminated  
-发单者接收到消息，`Order.status->terminated`  
-
-接单并完成，接单员按下完成按钮，发送通知，`Order.status->pending`  
-
-用户便可以评价，Ajax--> `(User.score * User.quantity + this.Score)/(User.quantity+1)`  
-用户点击‘是的，任务完成’，Ajax--> `Order.status->finished`  
-        用户两天没有确认，默认为完成状态  
-
-用户点击‘没有，任务出错’，Ajax--> `Order.status->wrong`  
-        接单员出错任务数加一，  
-        用户填写错误表单，生成错误单，发送消息告知接单员，让其填写申辩理由，  
-        交由人工处理  
-
-
-    用户属性：
-            使用：
-                    电话
-                    昵称
-                    邮箱地址
-                    余额
-            接单：
-                    出错数
-                    接单总数
-                    评分1-10
-                    终止订单数量
-                
-    Order
-            process: pending:"2015/03/28 13:24:30 +8",finished:time
 
 ---
 
     TODO:
-        ~~order#show 显示process~~
-        ~~user#show~~
+        #order#show 显示process
+        #user#show
         notification
-        ~~finished button~~
-        wrong  button
+        #finished button
+        #wrong  button
         把orders controller里的方法移出来
-        User验证， 
+        User验证页面，
+        用户两天没有确认，默认为完成状态
+
+很久之前的截图：
+![Demo Picture](http://although2013.com/uploads/pictures/detail_2015-03-30_19_08_26____.png)
 
