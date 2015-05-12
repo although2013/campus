@@ -4,9 +4,7 @@ class AuthenticationsController < ApplicationController
   end
 
   def create
-    #render :text => request.env["omniauth.auth"].to_yaml
     omniauth = request.env["omniauth.auth"]
-    Rails.logger.info "--- #{omniauth['info']['name']} ---"
     authentication = Authentication.find_by_provider_and_uid(omniauth['provider'], omniauth['uid'])
     if authentication
       sign_in_and_redirect(:user, authentication.user)

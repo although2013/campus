@@ -2,7 +2,6 @@
 #= require jquery_ujs
 #= require turbolinks
 #= require bootstrap
-#= require websocket_rails/main
 #= require moment
 #= require bootstrap-datetimepicker
 #= require_tree .

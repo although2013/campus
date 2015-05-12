@@ -63,8 +63,12 @@ class OrdersController < ApplicationController
       if current_user && current_user.name == @order.server
         process = order_process(@order, current_user)
         @order.update_attributes(:status => @order.status, :process => process)
-        current_user.update_attributes(:quantity => (current_user.quantity + 1), :current_orders => (current_user.current_orders - 1))
-        Notification.create(user_id: @order.user_id, order_id: @order.id, content: "你的订单##{@order.id},被接单员确认已完成!")
+
+        current_user.quantity += 1
+        current_user.current_orders -= 1
+        current_user.save(:validate => false)
+
+        #delay Notification.create(user_id: @order.user_id, order_id: @order.id, content: "你的订单##{@order.id},被接单员确认已完成!")
         respond_to do |format|
           format.js
         end
@@ -77,7 +81,7 @@ class OrdersController < ApplicationController
     if @order.user == current_user && (["pending","finished","wrong"].include? @order.status)
       @order.update_attribute(:stars, params[:star])
       server = User.find_by_name(@order.server)
-      server.update_attribute(:score, (server.score * (server.quantity-1) + 2 * ((params[:star]).to_i))/(server.quantity))
+      server.update_attribute(:score, (server.score * (server.quantity-1) + 2 * ((params[:star]).to_i))/(server.quantity), :validate => false)
       render :json => {}
     else
       render :json => {:error => '订单未完成或非本人订单,无法评分'}
@@ -99,9 +103,10 @@ class OrdersController < ApplicationController
       elsif @order.server.blank?
         process = order_process(@order, current_user)
         @order.update_attributes(:server => current_user.name, :status => @order.status, :process => process)
-        current_user.update_attributes(:current_orders => (current_user.current_orders + 1))
-        Notification.create(user_id: @order.user_id, order_id: @order.id, content: "你的订单##{@order.id},被接单啦!")
-        WebsocketRails[:orders].trigger 'order_gotten', @order.id
+        
+        current_user.update_attribute(:current_orders, (current_user.current_orders + 1))
+        
+        #delay Notification.create(user_id: @order.user_id, order_id: @order.id, content: "你的订单##{@order.id},被接单啦!")
         respond_to do |format|
           format.js
         end
@@ -119,7 +124,12 @@ class OrdersController < ApplicationController
     process = order_process(@order, current_user)
     if current_user && current_user.name == @order.server
       @order.update_attributes(:server => nil, :status => @order.status, :process => process)
-      current_user.update_attributes(:terminated_count => (current_user.terminated_count + 1), :current_orders => (current_user.current_orders - 1))
+      
+      current_user.terminated_count += 1
+      current_user.quantity         += 1
+      current_user.current_orders   -= 1
+      current_user.save(:validate => false)
+      
       respond_to do |format|
         format.js {render inline: "location.reload();" }
       end
@@ -139,7 +149,6 @@ class OrdersController < ApplicationController
       current_user.update_attribute(:phone, @order.phone)
       flash[:success] = "任务发布成功！"
       redirect_to @order
-      WebsocketRails[:orders].trigger 'new_order', current_user.name
     else
       flash[:danger] = "任务发布失败！"
       render :new
