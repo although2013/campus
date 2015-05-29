@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'https://ruby.taobao.org'
 
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
@@ -6,9 +6,11 @@ gem 'bootstrap-will_paginate'
 gem 'bootstrap-sass'
 gem 'devise'
 
-gem 'redis'
 gem 'mysql2'
 
+gem 'thin'
+
+gem 'message_bus'
 
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'

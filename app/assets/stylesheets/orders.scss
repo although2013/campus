@@ -65,7 +65,7 @@ p #or{
 }
 
 .order-card .order-content {
-  margin: 10px 5px 10px 5px;
+  margin: 10px -10px 10px -10px;
 }
 
 .order-card .order-title {
@@ -221,4 +221,10 @@ table {
 
 #index-paginate {
 
+}
+
+.well {
+  border-radius: 0;
+  border-width: 0;
+  background-color: #F2F2F2;
 }

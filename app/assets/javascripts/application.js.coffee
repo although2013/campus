@@ -3,6 +3,7 @@
 #= require turbolinks
 #= require bootstrap
 #= require moment
+#= require message_bus
 #= require bootstrap-datetimepicker
 #= require_tree .
 #= require_self

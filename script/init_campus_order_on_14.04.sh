@@ -31,7 +31,40 @@ echo "gem: --no-ri --no-rdoc" > ~/.gemrc
 gem install bundler
 
 
+echo"---------redis---------"
 
+wget http://download.redis.io/redis-stable.tar.gz
+tar xvzf redis-stable.tar.gz
+cd redis-stable
+make
+
+sudo cp src/redis-server /usr/local/bin/
+sudo cp src/redis-cli /usr/local/bin/
+
+#redis config
+sudo mkdir /etc/redis
+sudo mkdir /var/redis
+sudo cp utils/redis_init_script /etc/init.d/redis_6379
+
+sudo vi /etc/init.d/redis_6379
+
+sudo cp redis.conf /etc/redis/6379.conf
+sudo mkdir /var/redis/6379
+
+sudo vi /etc/redis/6379.conf
+#modify the file => /etc/redis/6379.conf
+#Set daemonize to yes (by default it is set to no).
+#Set the pidfile to /var/run/redis_6379.pid (modify the port if needed).
+#Change the port accordingly. In our example it is not needed as the default port is already 6379.
+#Set your preferred loglevel.
+#Set the logfile to /var/log/redis_6379.log
+#Set the dir to /var/redis/6379 (very important step!)
+
+sudo update-rc.d redis_6379 defaults
+/etc/init.d/redis_6379 start
+redis-cli ping
+
+#END------------redis----------
 
 
 

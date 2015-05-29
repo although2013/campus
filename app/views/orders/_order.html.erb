@@ -1,13 +1,13 @@
 <div class='order-card <%= "order#{order.id}" %>'>
   <div class="order-head">
     <span class="order-title"><%= order.title %></span>
-    
+
     <span class="order-total">￥<%= order.total %></span>
   </div>
 
 
   <div class="order-content well"><%= order.content %></div>
-  
+
     <div class="order-foot">
       <span class="order-deadline <%= 'time-down' if order.deadline != 0 %>"><%= dead_line_str(order.deadline) %></span>
       <span class="order-location"><%= order.location %></span>
@@ -15,7 +15,7 @@
     <div class="order-btns">
       <%= link_to '详情', order %>
       <% if current_user %>
-        <%= button_to '接单', { 
+        <%= button_to '接单', {
                               :controller => "orders",
                               :action => "get_order",
                               :user_id => current_user.id,
