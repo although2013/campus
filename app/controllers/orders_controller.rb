@@ -105,7 +105,7 @@ class OrdersController < ApplicationController
         @order.update_attributes(:server => current_user.name, :status => @order.status, :process => process)
 
         current_user.update_attribute(:current_orders, (current_user.current_orders + 1))
-
+        MessageBus.publish "/order_gotten", @order.id
         #delay Notification.create(user_id: @order.user_id, order_id: @order.id, content: "你的订单##{@order.id},被接单啦!")
         respond_to do |format|
           format.js
@@ -148,7 +148,7 @@ class OrdersController < ApplicationController
     if @order.save
       current_user.update_attribute(:phone, @order.phone)
       flash[:success] = "任务发布成功！"
-      MessageBus.publish "/create_new", "new_order_published!"
+      MessageBus.publish "/new_order", @order.to_json
       redirect_to @order
     else
       flash[:danger] = "任务发布失败！"
