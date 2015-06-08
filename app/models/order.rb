@@ -13,7 +13,7 @@ class Order < ActiveRecord::Base
 
   def status_format
     case self.status
-    when ("waiting" || "terminated")
+    when "waiting", "terminated"
       if self.deadline > Time.now()
         "等待中"
       else
@@ -31,3 +31,4 @@ class Order < ActiveRecord::Base
   end
 
 end
+
