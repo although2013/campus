@@ -9,3 +9,4 @@ $(document).on "ajax:success", "form", (xhr, data, response) ->
     if data.error
       alert("出错了,无法确认订单已完成。")
 
+

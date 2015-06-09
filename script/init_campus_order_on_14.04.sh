@@ -61,7 +61,7 @@ sudo vi /etc/redis/6379.conf
 #Set the dir to /var/redis/6379 (very important step!)
 
 sudo update-rc.d redis_6379 defaults
-/etc/init.d/redis_6379 start
+sudo /etc/init.d/redis_6379 start
 redis-cli ping
 
 #END------------redis----------
