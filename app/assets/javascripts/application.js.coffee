@@ -80,9 +80,10 @@ time_picker_know = () ->
       clearInterval time_picker_know_in
 
 star_hover_in = (selector) ->
-  $(selector).removeClass("glyphicon-star-empty").addClass("glyphicon-star").css("color", "green")
+  $(selector).removeClass("fa-star-o").addClass("fa-star").css("color", "green")
+
 star_hover_out = (selector) ->
-  $(selector).removeClass("glyphicon-star").addClass("glyphicon-star-empty").css("color", "black")
+  $(selector).removeClass("fa-star").addClass("fa-star-o").css("color", "black")
 
 
 star_success = (num) ->
@@ -117,36 +118,26 @@ star_click = (num) ->
 
 star_pick = () ->
   if $(".star").length
-    $(".star .1").hover(
-      -> star_hover_in(".star .1")
-      -> star_hover_out(".star .1")
-    ).click(
-      -> star_click(1)
-    )
-    $(".star .2").hover(
-      -> star_hover_in(".star .1, .star .2")
-      -> star_hover_out(".star .1, .star .2")
-    ).click(
-      -> star_click(2)
-    )
-    $(".star .3").hover(
-      -> star_hover_in(".star .1, .star .2, .star .3")
-      -> star_hover_out(".star .1, .star .2, .star .3")
-    ).click(
-      -> star_click(3)
-    )
-    $(".star .4").hover(
-      -> star_hover_in(".star .1, .star .2, .star .3, .star .4")
-      -> star_hover_out(".star .1, .star .2, .star .3, .star .4")
-    ).click(
-      -> star_click(4)
-    )
-    $(".star .5").hover(
-      -> star_hover_in(".star .1, .star .2, .star .3, .star .4, .star .5")
-      -> star_hover_out(".star .1, .star .2, .star .3, .star .4, .star .5")
-    ).click(
-      -> star_click(5)
-    )
+    $(".star .i1").hover(
+      -> star_hover_in($(".star i").filter(->$(this).attr('value')<2))
+      -> star_hover_out($(".star i").filter(->$(this).attr('value')<2))
+      ).click(parseInt($(this).attr('value')))
+    $(".star .i2").hover(
+      -> star_hover_in($(".star i").filter(->$(this).attr('value')<3))
+      -> star_hover_out($(".star i").filter(->$(this).attr('value')<3))
+      ).click(parseInt($(this).attr('value')))
+    $(".star .i3").hover(
+      -> star_hover_in($(".star i").filter(->$(this).attr('value')<4))
+      -> star_hover_out($(".star i").filter(->$(this).attr('value')<4))
+      ).click(parseInt($(this).attr('value')))
+    $(".star .i4").hover(
+      -> star_hover_in($(".star i").filter(->$(this).attr('value')<5))
+      -> star_hover_out($(".star i").filter(->$(this).attr('value')<5))
+      ).click(parseInt($(this).attr('value')))
+    $(".star .i5").hover(
+      -> star_hover_in($(".star i"))
+      -> star_hover_out($(".star i"))
+      ).click(parseInt($(this).attr('value')))
 
 
 do_search = () ->

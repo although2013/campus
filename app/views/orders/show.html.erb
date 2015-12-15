@@ -19,11 +19,11 @@
     <% if @order.stars == nil && current_user == @order.user && (["pending","finished","wrong"].include? @order.status) %>
 
       <div class="item star">请评分:
-        <span class="glyphicon glyphicon-star-empty 1" ></span>
-        <span class="glyphicon glyphicon-star-empty 2" ></span>
-        <span class="glyphicon glyphicon-star-empty 3" ></span>
-        <span class="glyphicon glyphicon-star-empty 4" ></span>
-        <span class="glyphicon glyphicon-star-empty 5" ></span>
+        <i class="fa fa-star-o i1" value='1'></i>
+        <i class="fa fa-star-o i2" value='2'></i>
+        <i class="fa fa-star-o i3" value='3'></i>
+        <i class="fa fa-star-o i4" value='4'></i>
+        <i class="fa fa-star-o i5" value='5'></i>
       </div>
     <% elsif @order.stars != nil %>
       <div class="item star-set">已评分:

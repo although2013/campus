@@ -10,6 +10,8 @@ gem 'mysql2'
 
 gem 'thin'
 
+gem 'font-awesome-sass'
+
 gem 'message_bus'
 
 gem 'momentjs-rails', '>= 2.9.0'
